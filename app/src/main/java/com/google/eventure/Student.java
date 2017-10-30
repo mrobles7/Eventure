@@ -11,8 +11,15 @@ public class Student {
     private String Password;
     private String Email;
 
-    public Student() {
+    public Student(){
 
+    }
+
+    public Student(String Usermame,String FirstName,String Password,String Email) {
+        this.Username =  Usermame;
+        this.FirstName = FirstName;
+        this.Password = Password;
+        this.Email = Email;
     }
     public Student(int id, String Usermame,String FirstName,String Password,String Email) {
         this.id = id;

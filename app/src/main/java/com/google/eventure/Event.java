@@ -13,9 +13,15 @@ public class Event {
     String description;
     String name;
 
+    public Event(){
 
-    public Event() {
+    }
 
+    public Event(String Name, String location, String description, String Date) {
+        this.name=Name;
+        this.location = location;
+        this.description = description;
+        this.Date =Date;
     }
     public Event(int id,String Name, String location, String description, String Date){
         this.id =id;
@@ -24,6 +30,7 @@ public class Event {
         this.description = description;
         this.Date =Date;
     }
+
 
     public void setId(int id){
         this.id=id;
