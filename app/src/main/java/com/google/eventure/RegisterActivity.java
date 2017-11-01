@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity
         String Passwword =  editPassword.toString();
         db = new DBHandler(getApplicationContext());
 
-        //creating a student object
+        //creating an Example student object
         Student Student1 = new Student(FirstName,Username,Passwword,FirstName);
 
         //random class

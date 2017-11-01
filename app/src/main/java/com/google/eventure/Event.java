@@ -6,6 +6,7 @@ import java.sql.Timestamp;
  * Created by ReignNelson on 10/8/17.
  */
 
+//Event and classes object
 public class Event {
     int id;
     String Date;
