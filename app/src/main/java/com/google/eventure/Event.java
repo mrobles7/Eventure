@@ -13,6 +13,10 @@ public class Event {
     String location;
     String description;
     String name;
+    String notifTime;
+    String Start;
+    String End;
+
 
     public Event(){
 
@@ -24,12 +28,13 @@ public class Event {
         this.description = description;
         this.Date =Date;
     }
-    public Event(int id,String Name, String location, String description, String Date){
+    public Event(int id,String Name, String location, String description, String Date, String notifTime){
         this.id =id;
         this.name=Name;
         this.location = location;
         this.description = description;
         this.Date =Date;
+        this.notifTime = notifTime;
     }
 
 
