@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity
         long Event_id = db.createEvent(Bio);
 
         //insert student in database with bio class
-        long Student1_id = db.createStudent(Student1,new long[]{Event_id});
+        long Student_id = db.createStudent(Student1,new long[]{Event_id});
 
 
         /*
