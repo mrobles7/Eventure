@@ -2,32 +2,30 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loginLink"
+    android:id="@+id/other"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.google.eventure.LogOutActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/descript"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="113dp"
         android:layout_marginTop="114dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:text="You have succesfully logged out. "
+        app:layout_constraintBottom_toTopOf="@+id/loginLink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="You have succesfully logged out. " />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/loginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Click here to go back to login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Click here to go back to login" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
