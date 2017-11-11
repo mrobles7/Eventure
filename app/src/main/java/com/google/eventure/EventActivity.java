@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class EventActivity extends AppCompatActivity {
-
+public class EventActivity extends RegisterActivity {
+    DBHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +28,25 @@ public class EventActivity extends AppCompatActivity {
             //This will happen when clicked
             public void onClick(View v) {
                 //--------MAKE SURE TO MAKE A REAL EVENT ID ASSIGNER BEFORE SHIPPING ---------
-                new Event(001 , textEvent.getText().toString() , textLoc.getText().toString(), textNote.getText().toString()
-                        , textDate.getText().toString() ,textNotif.getText().toString() );
+                Event Event1 =new Event(001 , textEvent.getText().toString() , textLoc.getText().toString(), textNote.getText().toString()
+                        , textDate.getText().toString() ,textNotif.getText().toString(),textStart.getText().toString()
+                        ,textEnd.getText().toString() );
 
+                db = new DBHandler(getApplicationContext());
+
+                //add the event to database
+                long Event1_id = db.createEvent(Event1);
+
+                //insert student in database with Event
+                Student1_id = db.createStudent(Student1,new long[]{Event1_id});
+
+
+                // if another event is added then add that under the same student
+                /*db.createStudentEvent(Student1_id, Event1_id);*/
             }
         });
+
+
     }
 
 

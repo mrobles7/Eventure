@@ -44,6 +44,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String EVENT_Description = "Description";
     private static final String EVENT_Location = "Location";
     private static final String EVENT_Name = "Name";
+    private static final String EVENT_Start = "Start";
+    private static final String EVENT_End= "End";
 
     //Create Event and Student Tables
     private static final String CREATE_TABLE_Student = "CREATE TABLE "
@@ -52,7 +54,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_Event = "CREATE TABLE " + TABLE_Event
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + EVENT_Description + " TEXT,"
-            + EVENT_Location + " TEXT" + EVENT_Name + "TEXT" + EVENT_Date + " DATETIME" + ")";
+            + EVENT_Location + " TEXT" + EVENT_Start+"TEXT"+EVENT_End +"Text" +EVENT_Name + "TEXT" + EVENT_Date + " TEXT" + ")";
 
     private static final String CREATE_TABLE_Student_Event = "CREATE TABLE "
             + TABLE_Student_Event + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
@@ -86,8 +88,9 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_Student_ID, Student_id);
         values.put(KEY_Event_ID, Event_id);
+        values.put(KEY_Student_ID, Student_id);
+
 
 
         long id = db.insert(TABLE_Student_Event, null, values);
@@ -179,6 +182,9 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(EVENT_Description, event.getDescription());
         values.put(EVENT_Location, event.getlocation());
         values.put(EVENT_Date, String.valueOf(event.getDate()));
+        values.put(EVENT_Start,String.valueOf(event.getStart()));
+        values.put(EVENT_End,String.valueOf(event.getEnd()));
+
 
         // insert row
         long event_id = db.insert(TABLE_Event, null, values);
@@ -222,7 +228,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(EVENT_Location, event.getlocation());
         values.put(EVENT_Description, event.getDescription());
         values.put(EVENT_Date, event.getDate());
-
+        values.put(EVENT_Start,event.getStart());
+        values.put(EVENT_End,event.getEnd());
 
 
         // updating row
@@ -231,7 +238,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //updating a student
-    public int updateToDo(Student student) {
+    public int updateStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -243,19 +250,6 @@ public class DBHandler extends SQLiteOpenHelper {
         // updating row
         return db.update(TABLE_Student, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(student.getID()) });
-    }
-
-     //Creating Student_Event
-    public long createTodoTag(long student_id, long Event_id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_Student_ID, student_id);
-        values.put(KEY_Event_ID, Event_id);
-
-        long id = db.insert(TABLE_Student_Event, null, values);
-
-        return id;
     }
 
     //getting all students under single event
@@ -292,7 +286,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //Updating a Student Event
-    public int updateNoteTag(long id, long tag_id) {
+    public int updateStudentEvent(long id, long tag_id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

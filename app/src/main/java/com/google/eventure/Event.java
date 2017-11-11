@@ -22,21 +22,24 @@ public class Event {
 
     }
 
-    public Event(String Name, String location, String description, String Date) {
+    public Event(String Name, String location, String description, String Date, String Start, String End) {
         this.name=Name;
         this.location = location;
         this.description = description;
         this.Date =Date;
+        this.Start=Start;
+        this.End=End;
     }
-    public Event(int id,String Name, String location, String description, String Date, String notifTime){
+    public Event(int id,String Name, String location, String description, String Date, String notifTime,String Start, String End){
         this.id =id;
         this.name=Name;
         this.location = location;
         this.description = description;
         this.Date =Date;
         this.notifTime = notifTime;
+        this.Start = Start;
+        this.End=End;
     }
-
 
     public void setId(int id){
         this.id=id;
@@ -53,6 +56,12 @@ public class Event {
     public void setDate(String Date){
         this.Date=Date;
     }
+    public void setStart(String Start){
+        this.Start=Start;
+    }
+    public void setEnd(String End){
+        this.End=End;
+    }
 
     public int getId(){
         return this.id;
@@ -63,7 +72,12 @@ public class Event {
     public String getlocation(){
         return this.location;
     }
-
+    public String getStart(){
+        return this.Start;
+    }
+    public String getEnd(){
+        return this.End;
+    }
     public String getDescription(){
         return this.description;
     }

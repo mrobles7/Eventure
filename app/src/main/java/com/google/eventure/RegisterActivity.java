@@ -5,12 +5,17 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 public class RegisterActivity extends AppCompatActivity
 {
     //initialize database
     DBHandler db;
+
+    public static  long Student1_id;
+    public static Student Student1;
+
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -31,15 +36,10 @@ public class RegisterActivity extends AppCompatActivity
         db = new DBHandler(getApplicationContext());
 
         //creating an Example student object
+
         Student Student1 = new Student(FirstName,Username,Passwword,FirstName);
 
-        //random class
-        Event Bio = new Event("BIO", "COB120","BIO Class","M W F 12:30-1:20");
-        //Insert class into database
-        long Event_id = db.createEvent(Bio);
 
-        //insert student in database with bio class
-        long Student_id = db.createStudent(Student1,new long[]{Event_id});
 
 
         /*
