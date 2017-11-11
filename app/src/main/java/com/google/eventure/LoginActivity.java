@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity
 {
+    //Initialize database
+    DBHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,6 +25,8 @@ public class LoginActivity extends AppCompatActivity
         final EditText editPassword = (EditText)findViewById(R.id.editPassword);
         final Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
         final TextView registerLink = (TextView) findViewById(R.id.registerLink);
+
+
 
         //When the user clicks the register link itll jump to that page
         //The OnClickListener waits for there to be clicked then it takes action
