@@ -14,9 +14,6 @@ public class LogOutActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_out);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
         //Hold a reference to all the activities in the XML file
         //FindViewById looks at the activity register filed and finds the id
         final TextView loginLink = (TextView) findViewById(R.id.loginLink);
