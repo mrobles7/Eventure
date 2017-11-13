@@ -1,4 +1,5 @@
 package com.google.eventure;
+import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Intent;
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity
     public static Student Student1;
     //Initialize database
     DBHandler dab;
+    @SuppressLint("Recycle")
     @Override
 
 
@@ -57,7 +59,7 @@ public class LoginActivity extends AppCompatActivity
             cursor.getColumnIndexOrThrow(DBHandler.KEY_Student_ID);
             Student1=dab.getStudent(Student1_id);
 
-        }
+        }//
 
         //When the user clicks the register link itll jump to that page
         //The OnClickListener waits for there to be clicked then it takes action
