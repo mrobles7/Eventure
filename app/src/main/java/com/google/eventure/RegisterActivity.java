@@ -11,9 +11,8 @@ public class RegisterActivity extends AppCompatActivity
 
     SQLiteOpenHelper openHelper;
     //initialize database
-    DBHandler db;
-    Button _btnreg, _btnlogin;
-    EditText _txtfanme, _txtlname, _txtpass, _txtemail, _txtphone;
+   // DBHandler db;
+
 
 
 
@@ -39,22 +38,24 @@ public class RegisterActivity extends AppCompatActivity
         String Name =  editName.toString();
         String Username =  editUsername.toString();
         String Passwword =  editPassword.toString();
-        db = new DBHandler(getApplicationContext());
+       // db = new DBHandler(getApplicationContext());
 
         //creating an Example student object
 
-         Student1 = new Student();
+         /*Student1 = new Student();
          Student1.setName(Name);
          Student1.setUsermame(Username);
          Student1.setPassword(Passwword);
 
-
+*/
         //insert student in database with Event //returns student_id
-         Student1_id = db.createStudent(Student1,new long[]{});
+  //       Student1_id = db.createStudent(Student1,new long[]{});
 
         /*
         when create event/add event are done i will link each student to events but
         for now just creating students with no events in database
          */
+
+       // db.closeDB();
     }
 }
