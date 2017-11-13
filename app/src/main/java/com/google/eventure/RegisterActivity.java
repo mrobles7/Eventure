@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity
        // db = new DBHandler(getApplicationContext());
 
         //creating an Example student object
-
+//
          /*Student1 = new Student();
          Student1.setName(Name);
          Student1.setUsermame(Username);
