@@ -17,16 +17,16 @@ public class LoginActivity extends AppCompatActivity
     public static  long Student1_id;
     public static Student Student1;
     //Initialize database
-    DBHandler dab;
-    @SuppressLint("Recycle")
+   // DBHandler dab;
+   // @SuppressLint("Recycle")
     @Override
 
 
     protected void onCreate(Bundle savedInstanceState)
     {
-        SQLiteDatabase db;
-        SQLiteOpenHelper openHelper;
-        Cursor cursor;
+      //  SQLiteDatabase db;
+       // SQLiteOpenHelper openHelper;
+        //Cursor cursor;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -38,13 +38,13 @@ public class LoginActivity extends AppCompatActivity
         final EditText editPassword = (EditText)findViewById(R.id.editPassword);
         final Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
         final TextView registerLink = (TextView) findViewById(R.id.registerLink);
-        openHelper=new DBHandler(this);
-        db = openHelper.getReadableDatabase();
+       // openHelper=new DBHandler(this);
+        //db = openHelper.getReadableDatabase();
 
         String Username =  editUsername.toString();
         String Passwword =  editPassword.toString();
 
-        cursor = db.rawQuery("SELECT *FROM " + DBHandler.TABLE_Student + " WHERE " +
+       /* cursor = db.rawQuery("SELECT *FROM " + DBHandler.TABLE_Student + " WHERE " +
                 DBHandler.STUDENT_Username+ " =? AND " + DBHandler.STUDENT_password + " =? " ,
                 new String[]{Username, Passwword});
         if (cursor != null) {
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity
             cursor.getColumnIndexOrThrow(DBHandler.KEY_Student_ID);
             Student1=dab.getStudent(Student1_id);
 
-        }//
+        }//*/
 
         //When the user clicks the register link itll jump to that page
         //The OnClickListener waits for there to be clicked then it takes action
@@ -78,9 +78,6 @@ public class LoginActivity extends AppCompatActivity
         });
 
 
-
-
-        //creating an Example student object
 
          }
 }
