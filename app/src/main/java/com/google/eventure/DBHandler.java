@@ -25,18 +25,18 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     // Database Name
     private static final String DATABASE_NAME = "Eventure";
-    // Contacts table name
-    private static final String TABLE_Student = "Student";
-    private static final String TABLE_Event = "Event";
-    private static final String TABLE_Student_Event = "Student_Event";
+    // table name
+    public static final String TABLE_Student = "Student";
+    public static final String TABLE_Event = "Event";
+    public static final String TABLE_Student_Event = "Student_Event";
     // Student Table Columns names
     private static final String KEY_ID = "ID";
 
-    private static final String KEY_Student_ID = "Student_ID";
-    private static final String STUDENT_NAME = "FirstName";
-    private static final String STUDENT_Username = "Username";
-    private static final String STUDENT_password = "Password";
-    private static final String STUDENT_Email = "Email";
+    public static final String KEY_Student_ID = "Student_ID";
+    public static final String STUDENT_NAME = "FirstName";
+    public static final String STUDENT_Username = "Username";
+    public static final String STUDENT_password = "Password";
+    public static final String STUDENT_Email = "Email";
 
     //Event Table Columns names
     private static final String KEY_Event_ID = "Event_ID";

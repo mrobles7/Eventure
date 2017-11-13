@@ -32,13 +32,13 @@ public class EventActivity extends RegisterActivity {
                         , textDate.getText().toString() ,textNotif.getText().toString(),textStart.getText().toString()
                         ,textEnd.getText().toString() );
 
+
                 db = new DBHandler(getApplicationContext());
 
                 //add the event to database
                 long Event1_id = db.createEvent(Event1);
 
-                //insert student in database with Event
-                Student1_id = db.createStudent(Student1,new long[]{Event1_id});
+
 
 
                 // if another event is added then add that under the same student

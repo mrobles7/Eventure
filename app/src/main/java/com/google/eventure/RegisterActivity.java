@@ -4,15 +4,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 public class RegisterActivity extends AppCompatActivity
 {
+
+    SQLiteOpenHelper openHelper;
     //initialize database
     DBHandler db;
+    Button _btnreg, _btnlogin;
+    EditText _txtfanme, _txtlname, _txtpass, _txtemail, _txtphone;
 
-    public static  long Student1_id;
+
+
     public static Student Student1;
-
+    public static long Student1_id;
     @Override
 
 
@@ -29,18 +35,22 @@ public class RegisterActivity extends AppCompatActivity
         final EditText editPassword = (EditText)findViewById(R.id.editPassword);
         final Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
-        //Convert to Edittext string then add to database
-        String FirstName =  editName.toString();
+        //Convert to Edittext to string
+        String Name =  editName.toString();
         String Username =  editUsername.toString();
         String Passwword =  editPassword.toString();
         db = new DBHandler(getApplicationContext());
 
         //creating an Example student object
 
-        Student Student1 = new Student(FirstName,Username,Passwword,FirstName);
+         Student1 = new Student();
+         Student1.setName(Name);
+         Student1.setUsermame(Username);
+         Student1.setPassword(Passwword);
 
 
-
+        //insert student in database with Event //returns student_id
+         Student1_id = db.createStudent(Student1,new long[]{});
 
         /*
         when create event/add event are done i will link each student to events but
