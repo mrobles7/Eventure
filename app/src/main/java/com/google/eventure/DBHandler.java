@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by ReignNelson on 10/2/17.
@@ -20,7 +21,7 @@ import android.util.Log;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final String LOG = "DatabaseHelper";
+    private static final String LOGTAG = "DatabaseHelper";
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -30,7 +31,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String TABLE_Event = "Event";
     public static final String TABLE_Student_Event = "Student_Event";
     // Student Table Columns names
-    private static final String KEY_ID = "ID";
+    private static final String KEY_ID = "ID" ;
 
     public static final String KEY_Student_ID = "Student_ID";
     public static final String STUDENT_NAME = "FirstName";
@@ -70,7 +71,10 @@ public class DBHandler extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(CREATE_TABLE_Student);
         db.execSQL(CREATE_TABLE_Event);
-        db.execSQL(CREATE_TABLE_Student_Event);
+       // db.execSQL(CREATE_TABLE_Student_Event);
+
+        Log.i(LOGTAG, "Tables were created");
+
     }
 
     @Override
@@ -97,7 +101,41 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return id;
     }
-    //Create Student
+    //insrt just a student
+    public void insertEntry(Student student){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(STUDENT_NAME,student.getName());
+        values.put(STUDENT_Username, student.getUsername());
+        values.put(STUDENT_password, student.getPassword());
+        values.put(STUDENT_Email, student.getEmail());
+
+
+        // Insert the row into your table
+        db.insert(TABLE_Student, null, values);
+       
+
+        //Toast.makeText(getApplicationContext(), "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+
+    }
+    //get sing entry
+    public String getSinlgeEntry(String userName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor=db.query(TABLE_Student, null, " Username=?",
+                new String[]{userName}, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String password= cursor.getString(cursor.getColumnIndex("Password"));
+        cursor.close();
+        return password;
+    }
+    //Create Student with event
     public long createStudent(Student student, long[] Event_ids) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -124,7 +162,7 @@ public class DBHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE_Student + " WHERE "
                 + KEY_ID + " = " + Student_id;
 
-        Log.e(LOG, selectQuery);
+        Log.e(LOGTAG, selectQuery);
 
         Cursor c = db.rawQuery(selectQuery, null);
 
@@ -145,7 +183,7 @@ public class DBHandler extends SQLiteOpenHelper {
         List<Student> students = new ArrayList<Student>();
         String selectQuery = "SELECT  * FROM " + TABLE_Student;
 
-        Log.e(LOG, selectQuery);
+        Log.e(LOGTAG, selectQuery);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -196,7 +234,7 @@ public class DBHandler extends SQLiteOpenHelper {
         List<Event> event = new ArrayList<Event>();
         String selectQuery = "SELECT  * FROM " + TABLE_Event;
 
-        Log.e(LOG, selectQuery);
+        Log.e(LOGTAG, selectQuery);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -262,7 +300,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + " = " + "tt." + KEY_Event_ID + " AND td." + KEY_ID + " = "
                 + "tt." + KEY_Student_ID;
 
-        Log.e(LOG, selectQuery);
+        Log.e(LOGTAG, selectQuery);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);

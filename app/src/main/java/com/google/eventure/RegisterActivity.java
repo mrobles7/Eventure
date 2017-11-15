@@ -1,61 +1,96 @@
 package com.google.eventure;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-public class RegisterActivity extends AppCompatActivity
-{
+import android.widget.Toast;
 
-    SQLiteOpenHelper openHelper;
+public class RegisterActivity extends AppCompatActivity {
+
+    // SQLiteOpenHelper openHelper;
     //initialize database
-   // DBHandler db;
+    // DBHandler db;
 
 
-
+    Button btnlogin;
+    DBHandler db;
 
     public static Student Student1;
     public static long Student1_id;
+
     @Override
 
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        db = new DBHandler(getApplicationContext());
         //Hold a reference to all the activities in the XML file
         //Its a final variable because editName is the only one its gonna be assigned to
         //FindViewById looks at the activity register filed and finds the id
-        final EditText editName = (EditText)findViewById(R.id.editName);
-        final EditText editUsername = (EditText)findViewById(R.id.editUsername);
-        final EditText editPassword = (EditText)findViewById(R.id.editPassword);
-        final Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        final EditText editName = (EditText) findViewById(R.id.editName);
+        final EditText editUsername = (EditText) findViewById(R.id.editUsername);
+        final EditText editPassword = (EditText) findViewById(R.id.editPassword);
 
-        //Convert to Edittext to string
-        String Name =  editName.toString();
-        String Username =  editUsername.toString();
-        String Passwword =  editPassword.toString();
-       // db = new DBHandler(getApplicationContext());
 
-        //creating an Example student object
-//
-         /*Student1 = new Student();
-         Student1.setName(Name);
-         Student1.setUsermame(Username);
-         Student1.setPassword(Passwword);
+        Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
 
-*/
-        //insert student in database with Event //returns student_id
-  //       Student1_id = db.createStudent(Student1,new long[]{});
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                String Name = editName.getText().toString();
+                String userName = editUsername.getText().toString();
+                String password = editPassword.getText().toString();
+                // String confirmPassword=editTextConfirmPassword.getText().toString();
 
-        /*
-        when create event/add event are done i will link each student to events but
-        for now just creating students with no events in database
-         */
+                // check if any of the fields are vaccant
+             /*  if(userName.equals("")||password.equals("")||confirmPassword.equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
+                    return;
+                }*/
+                // check if both password matches
+               /* if(!password.equals(confirmPassword))
+                {
+                    Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
+                    return;
+                }*/
+                // else
+                //{
+                // Save the Data in Database
 
-       // db.closeDB();
+                Student student = new Student();
+                student.setName(Name);
+                student.setUsermame(userName);
+                student.setPassword(password);
+
+                db.insertEntry(student);
+
+                Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+                //}
+
+                Intent registerIntent = new Intent(RegisterActivity.this, ScheduleActivity.class);
+                startActivity(registerIntent);
+
+            }
+        });
     }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        db.close();
+
+    }
+
+
 }

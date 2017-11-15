@@ -16,21 +16,19 @@ public class LoginActivity extends AppCompatActivity
 
     public static  long Student1_id;
     public static Student Student1;
-    //Initialize database
-   // DBHandler dab;
-   // @SuppressLint("Recycle")
+
+
+    Button btnlogin;
+    DBHandler db;
     @Override
 
 
     protected void onCreate(Bundle savedInstanceState)
     {
-      //  SQLiteDatabase db;
-       // SQLiteOpenHelper openHelper;
-        //Cursor cursor;
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        db = new DBHandler(getApplicationContext());
         //Hold a reference to all the activities in the XML file
         //Its a final variable because editName is the only one its gonna be assigned to
         //FindViewById looks at the activity register filed and finds the id
@@ -38,29 +36,6 @@ public class LoginActivity extends AppCompatActivity
         final EditText editPassword = (EditText)findViewById(R.id.editPassword);
         final Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
         final TextView registerLink = (TextView) findViewById(R.id.registerLink);
-       // openHelper=new DBHandler(this);
-        //db = openHelper.getReadableDatabase();
-
-        String Username =  editUsername.toString();
-        String Passwword =  editPassword.toString();
-
-       /* cursor = db.rawQuery("SELECT *FROM " + DBHandler.TABLE_Student + " WHERE " +
-                DBHandler.STUDENT_Username+ " =? AND " + DBHandler.STUDENT_password + " =? " ,
-                new String[]{Username, Passwword});
-        if (cursor != null) {
-            if (cursor.getCount() > 0) {
-                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(getApplicationContext(), "Login error", Toast.LENGTH_SHORT).show();
-            }
-
-            //get studentId
-            cursor.getColumnIndexOrThrow(DBHandler.KEY_Student_ID);
-            Student1=dab.getStudent(Student1_id);
-
-        }//*///
-
         //When the user clicks the register link itll jump to that page
         //The OnClickListener waits for there to be clicked then it takes action
         registerLink.setOnClickListener(new View.OnClickListener()
@@ -77,6 +52,40 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
+        btnlogin=(Button)findViewById(R.id.buttonLogin);
+            // Set On ClickListener
+            btnlogin.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    // get The User name and Password
+                    String userName=editUsername.getText().toString();
+                    String password=editPassword.getText().toString();
+
+                    // fetch the Password form database for respective user name
+                //    String storedPassword=db.getSinlgeEntry(userName);
+
+                    // check if the Stored password matches with  Password entered by user
+               /*     if(password.equals(storedPassword))
+                    {
+                        Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+                    }
+*/
+                    Intent login = new Intent(LoginActivity.this, ScheduleActivity.class);
+                    LoginActivity.this.startActivity(login);
+                }
+            });
+
+        }
+
+        @Override
+        protected void onDestroy() {
+        super.onDestroy();
+        // Close The Database
+        db.close();
 
 
          }
