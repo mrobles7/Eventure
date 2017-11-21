@@ -3,14 +3,16 @@ import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.database.Cursor;
+import java.util.List;
 import android.widget.Toast;
+import android.util.Log;
 public class LoginActivity extends AppCompatActivity
 {
 
@@ -19,7 +21,7 @@ public class LoginActivity extends AppCompatActivity
 
 
     Button btnlogin;
-    DBHandler db;
+    DatabaseHelper db;
     @Override
 
 
@@ -28,7 +30,7 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        db = new DBHandler(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
         //Hold a reference to all the activities in the XML file
         //Its a final variable because editName is the only one its gonna be assigned to
         //FindViewById looks at the activity register filed and finds the id
@@ -61,21 +63,25 @@ public class LoginActivity extends AppCompatActivity
                     String userName=editUsername.getText().toString();
                     String password=editPassword.getText().toString();
 
+                    String storedPassword;
+                    String storedUsername;
                     // fetch the Password form database for respective user name
-                //    String storedPassword=db.getSinlgeEntry(userName);
+                    List<Student> allStudents = db.getAllStudents();
 
-                    // check if the Stored password matches with  Password entered by user
-               /*     if(password.equals(storedPassword))
-                    {
-                        Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+                    for (Student st : allStudents) {
+                         storedPassword = st.getUsername();
+                         storedUsername = st.getPassword();
+                        //   check if the Stored password matches with  Password entered by user
+                        if (password.equals(storedPassword) && userName.equals(storedUsername)) {
+                            Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+                            Intent login = new Intent(LoginActivity.this, ScheduleActivity.class);
+                            LoginActivity.this.startActivity(login);
+
+                        }
+
                     }
-                    else
-                    {
-                        Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
-                    }
-*/
-                    Intent login = new Intent(LoginActivity.this, ScheduleActivity.class);
-                    LoginActivity.this.startActivity(login);
+                   Toast.makeText(LoginActivity.this,"Wrong user name or password ", Toast.LENGTH_LONG).show();
+
                 }
             });
 

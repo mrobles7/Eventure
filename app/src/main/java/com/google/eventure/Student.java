@@ -13,6 +13,11 @@ public class Student {
 
     public Student(){
 
+        this.FirstName=" ";
+        this.Username=" ";
+        this.Password=" ";
+        this.Email=" ";
+
     }
     public Student(String Usermame,String FirstName,String Password,String Email) {
         this.Username =  Usermame;

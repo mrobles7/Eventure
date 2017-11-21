@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+
 public class RegisterActivity extends AppCompatActivity {
 
     // SQLiteOpenHelper openHelper;
@@ -18,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     Button btnlogin;
-    DBHandler db;
+    DatabaseHelper db;
 
     public static Student Student1;
     public static long Student1_id;
@@ -32,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        db = new DBHandler(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
         //Hold a reference to all the activities in the XML file
         //Its a final variable because editName is the only one its gonna be assigned to
         //FindViewById looks at the activity register filed and finds the id
@@ -72,7 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
                 student.setUsermame(userName);
                 student.setPassword(password);
 
-                db.insertEntry(student);
+
+                //Event event = new Event("Bio", "COB2", "Class", "Monday", "5pm", "6pm");
+              //  long event1= db.createEvent(event);
+
+               Student1_id= db.createStudent(student);
+
 
                 Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
                 //}
