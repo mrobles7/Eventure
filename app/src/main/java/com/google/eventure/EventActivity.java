@@ -1,6 +1,5 @@
 package com.google.eventure;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +7,7 @@ import android.widget.EditText;
 
 public class EventActivity extends RegisterActivity {
     DBHandler db;
+    int IDcounter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,10 +15,14 @@ public class EventActivity extends RegisterActivity {
 
         final EditText textEvent = (EditText) findViewById((R.id.txtEvent));
         final EditText textLoc = (EditText) findViewById((R.id.txtLoc));
-        final EditText textStart = (EditText) findViewById((R.id.txtStart));
-        final EditText textEnd = (EditText) findViewById((R.id.txtEnd));
+        final EditText textEndMinute = (EditText) findViewById((R.id.txtEndMinute));
+        final EditText textEndHour = (EditText) findViewById((R.id.txtEndHour));
         final EditText textNotif = (EditText) findViewById((R.id.txtNotif));
-        final EditText textDate = (EditText) findViewById((R.id.txtDate));
+        final EditText textYear = (EditText) findViewById((R.id.txtYear));
+        final EditText textMonth = (EditText) findViewById((R.id.txtMonth));
+        final EditText textDay = (EditText) findViewById((R.id.txtDay));
+        final EditText textStartHour = (EditText) findViewById((R.id.txtStartHour));
+        final EditText textStartMinute = (EditText) findViewById((R.id.txtStartMinute));
         final EditText textNote = (EditText) findViewById((R.id.txtNote));
         final Button buttonSave = (Button) findViewById(R.id.btnSave);
 
@@ -27,19 +31,15 @@ public class EventActivity extends RegisterActivity {
             @Override
             //This will happen when clicked
             public void onClick(View v) {
-                //--------MAKE SURE TO MAKE A REAL EVENT ID ASSIGNER BEFORE SHIPPING ---------
-                Event Event1 =new Event(001 , textEvent.getText().toString() , textLoc.getText().toString(), textNote.getText().toString()
-                        , textDate.getText().toString() ,textNotif.getText().toString(),textStart.getText().toString()
-                        ,textEnd.getText().toString() );
+                Event Event1 =new Event(IDcounter += 1 , textYear.getText().toString() , textMonth.getText().toString(), textDay.getText().toString()
+                        , textStartHour.getText().toString() ,textStartMinute.getText().toString(),textEndHour.getText().toString()
+                        ,textEndMinute.getText().toString(), textNote.getText().toString(), textEvent.getText().toString(), textLoc.getText().toString() );
 
 
                 db = new DBHandler(getApplicationContext());
 
                 //add the event to database
                 long Event1_id = db.createEvent(Event1);
-
-
-
 
                 // if another event is added then add that under the same student
                 /*db.createStudentEvent(Student1_id, Event1_id);*/
