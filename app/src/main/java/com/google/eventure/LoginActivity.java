@@ -73,14 +73,18 @@ public class LoginActivity extends AppCompatActivity
                          storedUsername = st.getPassword();
                         //   check if the Stored password matches with  Password entered by user
                         if (password.equals(storedUsername) && userName.equals(storedPassword)) {
-                            Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+
                             Intent login = new Intent(LoginActivity.this, ScheduleActivity.class);
                             LoginActivity.this.startActivity(login);
 
                         }
 
+                        else{
+                            Toast.makeText(LoginActivity.this,"Wrong user name or password ", Toast.LENGTH_LONG).show();
+                        }
+
                     }
-                   Toast.makeText(LoginActivity.this,"Wrong user name or password ", Toast.LENGTH_LONG).show();
+
 
                 }
             });

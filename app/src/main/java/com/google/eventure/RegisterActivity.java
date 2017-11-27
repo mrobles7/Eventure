@@ -90,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub

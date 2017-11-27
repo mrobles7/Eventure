@@ -44,8 +44,38 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String KEY_password= "password";
 
 
-    // TAGS Table - column names
-    private static final String KEY_TAG_NAME = "tag_name";
+    // Event Table - column names
+    private static final String  KEY_year = "year";
+    private static final String  KEY_month = "month";
+    private static final String  KEY_day = "day";
+    private static final String  KEY_hour = "hour";
+    private static final String  KEY_minute = "minute";
+    private static final String  KEY_Ehour= "Ehour";
+    private static final String  KEY_Eminute= "Eminute";
+    private static final String  KEY_EventDate = "EventDate";
+    private static final String  KEY_FormattedDate = "FormattedDate";
+    private static final String  KEY_location = "location";
+    private static final String  KEY_description = "description";
+    private static final String  KEY_name = "name";
+    private static final String  KEY_notification= "notification";
+    private static final String  KEY_start = "start";
+    private static final String  KEY_end= "end";
+
+    /*
+
+      int id, year, month, day, hour, minute, Ehour, Eminute;
+    String EventDate;
+    Date FormattedDate;
+    String location;
+    String description;
+    String name;
+    Date NotifDate;
+    String notifTime;
+    String Start;
+    String End;
+
+     */
+
 
     // NOTE_TAGS Table - column names
   //  private static final String KEY_TODO_ID = "todo_id";
@@ -58,11 +88,16 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
             + " TEXT," + KEY_Username + " Text," + KEY_password
             + " Text" + ")";
 
-    // Tag table create statement
-  /*  private static final String CREATE_TABLE_TAG = "CREATE TABLE " + TABLE_TAG
-            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TAG_NAME + " TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
-
+    // Event table create statement
+    private static final String CREATE_TABLE_TAG = "CREATE TABLE " + TABLE_TAG
+            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_year+ " INTEGER,"
+            + KEY_month+ " INTEGER," + KEY_day+ " INTEGER," + KEY_hour+ " INTEGER,"
+            +KEY_minute+ " INTEGER," +KEY_Ehour+ " INTEGER," + KEY_Eminute+ " INTEGER,"
+            + KEY_EventDate+ " Text,"+ KEY_FormattedDate + " DATE,"+ KEY_location + " Text,"
+            + KEY_name+ " Text,"+ KEY_notification + " DATE,"+ KEY_start + " Text,"
+            + KEY_end+ " Text,"+ KEY_description + " Text,"
+            +")";
+/*
     // todo_tag table create statement
     private static final String CREATE_TABLE_TODO_TAG = "CREATE TABLE "
             + TABLE_TODO_TAG + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
@@ -94,13 +129,13 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     }
 
-    public long createStudent(Student todo) {
+    public long createStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_Name, todo.getName());
-        values.put(KEY_Username, todo.getUsername());
-        values.put(KEY_password, todo.getPassword());
+        values.put(KEY_Name, student.getName());
+        values.put(KEY_Username, student.getUsername());
+        values.put(KEY_password, student.getPassword());
 
         // insert row
         long todo_id = db.insert(TABLE_TODO, null, values);
@@ -137,4 +172,42 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         return todos;
     }
+
+    public long createEvent(Event event) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+
+        // insert row
+        long tag_id = db.insert(TABLE_TAG, null, values);
+
+        return tag_id;
+    }
+
+    /**
+     * getting all tags
+     *
+    public List<Tag> getAllTags() {
+        List<Tag> tags = new ArrayList<Tag>();
+        String selectQuery = "SELECT  * FROM " + TABLE_TAG;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                Tag t = new Tag();
+                t.setId(c.getInt((c.getColumnIndex(KEY_ID))));
+                t.setTagName(c.getString(c.getColumnIndex(KEY_TAG_NAME)));
+
+                // adding to tags list
+                tags.add(t);
+            } while (c.moveToNext());
+        }
+        return tags;
+    }*/
 }

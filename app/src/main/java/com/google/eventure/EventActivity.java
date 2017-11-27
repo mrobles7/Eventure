@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class EventActivity extends RegisterActivity {
-    DBHandler db;
+    DatabaseHelper db;
     static int IDcounter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class EventActivity extends RegisterActivity {
                     // then create the event
                     Event Event1 = new Event(IDcounter += 1, year, month, day, SHour, SMinute, EHour , EMinute, NHour,NMinute,
                             textNote.getText().toString(), textEvent.getText().toString(), textLoc.getText().toString());
-                    db = new DBHandler(getApplicationContext());
+                    db = new DatabaseHelper(getApplicationContext());
                     // and add the event to database
                     long Event1_id = db.createEvent(Event1);
 
