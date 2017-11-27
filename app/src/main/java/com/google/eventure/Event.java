@@ -13,13 +13,12 @@ import java.util.TimeZone;
 //Event and classes object
 public class Event {
 
-    int id, year, month, day, hour, minute, Ehour, Eminute;
+    int id, year, month, day, hour, minute, EHour, EMinute;
     String EventDate;
-    Date FormattedDate;
+    Date StartDate, EndDate, NotifDate;
     String location;
     String description;
     String name;
-    Date NotifDate;
     String notifTime;
     String Start;
     String End;
@@ -28,21 +27,23 @@ public class Event {
     public Event(){
 
     }
-    public Event (int id, String year, String month, String day, String hour, String minute, String Ehour, String Eminute,
+    public Event (int id, int year, int month, int day, int hour, int minute, int EHour, int EMinute, int NHour, int NMinute,
                   String Description, String Name, String Location)
     {
-        this.id = id;
-        this.year = Integer.parseInt(year);
-        this.month = Integer.parseInt(month);
-        this.day = Integer.parseInt(day);
-        this.hour = Integer.parseInt(hour);
-        this.minute = Integer.parseInt(minute);
         String UFDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
-        this.FormattedDate = convertStringtoDate(UFDate);
-        this.Ehour = Integer.parseInt(Ehour);
-        this.Eminute = Integer.parseInt(Eminute);
-        String notifDate = year+"/"+month+"/"+day+"/"+Ehour+"/"+Eminute;
+        String EndDate = year+"/"+month+"/"+day+"/"+EHour+"/"+EMinute;
+        String notifDate = year+"/"+month+"/"+day+"/"+NHour+"/"+NMinute;
+        this.StartDate = convertStringtoDate(UFDate);
+        this.EndDate = convertStringtoDate(EndDate);
         this.NotifDate = convertStringtoDate(notifDate);
+        this.id = id;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.EHour = EHour;
+        this.EMinute = EMinute;
         this.description = Description;
         this.name = Name;
         this.location = Location;
@@ -52,7 +53,7 @@ public class Event {
         this.location = location;
         this.description = description;
         this.EventDate = Date;
-        this.FormattedDate = convertStringtoDate(Date);
+        this.StartDate = convertStringtoDate(Date);
         this.Start=Start;
         this.End=End;
     }
@@ -62,7 +63,7 @@ public class Event {
         this.location = location;
         this.description = description;
         this.EventDate =Date;
-        this.FormattedDate = convertStringtoDate(Date);
+        this.StartDate = convertStringtoDate(Date);
         this.notifTime = notifTime;
         this.Start = Start;
         this.End=End;
@@ -78,7 +79,7 @@ public class Event {
         try{
             FDate = df.parse(dateString);
         }catch(Exception EX) {
-            System.out.println("System failed to parse the date.\nError Code: \n" + EX);
+            System.out.println("System failed to parse the date\nError Code: " + EX);
 
         }
         return FDate;
@@ -98,7 +99,7 @@ public class Event {
     }
     public void setDate(String Date){
         this.EventDate=Date;
-        this.FormattedDate = convertStringtoDate(Date);
+        this.StartDate = convertStringtoDate(Date);
     }
     public void setStart(String Start){
         this.Start=Start;
