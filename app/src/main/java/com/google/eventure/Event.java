@@ -89,7 +89,14 @@ public class Event {
     public String getDescription(){
         return this.description;
     }
-
+    public String getStart() {
+        String rs= hour + ":" + minute;
+        return rs;
+    }
+    public String getEnd(){
+        String rs = EHour +":" + EMinute;
+        return rs;
+    }
     public String getDate(){
         return this.SDate;
     }
