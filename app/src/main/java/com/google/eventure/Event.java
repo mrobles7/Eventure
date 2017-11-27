@@ -48,26 +48,7 @@ public class Event {
         this.name = Name;
         this.location = Location;
     }
-    public Event(String Name, String location, String description, String Date, String Start, String End) {
-        this.name=Name;
-        this.location = location;
-        this.description = description;
-        this.EventDate = Date;
-        this.StartDate = convertStringtoDate(Date);
-        this.Start=Start;
-        this.End=End;
-    }
-    public Event(int id, String Name, String location, String description, String Date, String notifTime,String Start, String End){
-        this.id =id;
-        this.name=Name;
-        this.location = location;
-        this.description = description;
-        this.EventDate =Date;
-        this.StartDate = convertStringtoDate(Date);
-        this.notifTime = notifTime;
-        this.Start = Start;
-        this.End=End;
-    }
+
     //this method was pulled off of
     //https://beginnersbook.com/2013/04/java-string-to-date-conversion/
     //as a way to convert strings to dates
