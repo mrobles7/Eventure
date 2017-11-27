@@ -14,14 +14,8 @@ import java.util.TimeZone;
 public class Event {
 
     int id, year, month, day, hour, minute, EHour, EMinute;
-    String EventDate;
     Date StartDate, EndDate, NotifDate;
-    String location;
-    String description;
-    String name;
-    String notifTime;
-    String Start;
-    String End;
+    String location, description, name, SDate, EDate, NDate;
 
 
     public Event(){
@@ -30,12 +24,12 @@ public class Event {
     public Event (int id, int year, int month, int day, int hour, int minute, int EHour, int EMinute, int NHour, int NMinute,
                   String Description, String Name, String Location)
     {
-        String UFDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
-        String EndDate = year+"/"+month+"/"+day+"/"+EHour+"/"+EMinute;
-        String notifDate = year+"/"+month+"/"+day+"/"+NHour+"/"+NMinute;
-        this.StartDate = convertStringtoDate(UFDate);
-        this.EndDate = convertStringtoDate(EndDate);
-        this.NotifDate = convertStringtoDate(notifDate);
+        SDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
+        EDate = year+"/"+month+"/"+day+"/"+EHour+"/"+EMinute;
+        NDate = year+"/"+month+"/"+day+"/"+NHour+"/"+NMinute;
+        this.StartDate = convertStringtoDate(SDate);
+        this.EndDate = convertStringtoDate(EDate);
+        this.NotifDate = convertStringtoDate(NDate);
         this.id = id;
         this.year = year;
         this.month = month;
@@ -79,16 +73,9 @@ public class Event {
         this.description=description;
     }
     public void setDate(String Date){
-        this.EventDate=Date;
+        this.SDate=Date;
         this.StartDate = convertStringtoDate(Date);
     }
-    public void setStart(String Start){
-        this.Start=Start;
-    }
-    public void setEnd(String End){
-        this.End=End;
-    }
-
     public int getId(){
         return this.id;
     }
@@ -98,17 +85,12 @@ public class Event {
     public String getlocation(){
         return this.location;
     }
-    public String getStart(){
-        return this.Start;
-    }
-    public String getEnd(){
-        return this.End;
-    }
+
     public String getDescription(){
         return this.description;
     }
 
     public String getDate(){
-        return this.EventDate;
+        return this.SDate;
     }
 }
