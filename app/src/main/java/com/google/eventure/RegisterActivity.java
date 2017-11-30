@@ -73,11 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                 student.setUsermame(userName);
                 student.setPassword(password);
 
-
-                //Event event = new Event("Bio", "COB2", "Class", "Monday", "5pm", "6pm");
-              //  long event1= db.createEvent(event);
-
-               Student1_id= db.createStudent(student);
+               student.setID(db.createStudent(student));
 
 
                 Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();

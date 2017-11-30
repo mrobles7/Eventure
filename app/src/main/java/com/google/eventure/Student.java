@@ -5,7 +5,7 @@ package com.google.eventure;
  */
 
 public class Student {
-    private int id;
+    private long id;
     private String FirstName;
     private String Username;
     private String Password;
@@ -32,7 +32,7 @@ public class Student {
         this.Password = Password;
         this.Email = Email;
     }
-    public void setID(int id){
+    public void setID(long id){
         this.id=id;
     }
 
@@ -49,7 +49,7 @@ public class Student {
     public void setPassword(String password) {
        this.Password =password;
     }
-    public int getID() {
+    public long getID() {
         return id;
     }
     public String getName() {

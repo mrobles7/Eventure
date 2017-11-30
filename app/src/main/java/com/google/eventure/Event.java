@@ -15,8 +15,8 @@ public class Event {
 
     int id, year, month, day, hour, minute, EHour, EMinute;
     Date StartDate, EndDate, NotifDate;
-    String location, description, name, SDate, EDate, NDate;
-
+    String location, description, Ename, SDate, EDate, NDate;
+    boolean notification;
 
     public Event(){
 
@@ -39,7 +39,7 @@ public class Event {
         this.EHour = EHour;
         this.EMinute = EMinute;
         this.description = Description;
-        this.name = Name;
+        this.Ename = Name;
         this.location = Location;
     }
 
@@ -64,13 +64,28 @@ public class Event {
         this.id=id;
     }
     public void setName(String name){
-        this.name=name;
+        this.Ename=name;
+    }
+    public void setYear(int year){
+        this.year=year;
+    }
+    public void setmonth(int month){
+        this.month=month;
+    }
+    public void setday(int day){
+        this.day=day;
+    }
+    public void setMinute(int minute){
+        this.minute=minute;
     }
     public void setlocation(String location){
         this.location=location;
     }
     public void setdescription(String description){
         this.description=description;
+    }
+    public void sethour(int hour){
+        this.hour=hour;
     }
     public void setDate(String Date){
         this.SDate=Date;
@@ -80,7 +95,7 @@ public class Event {
         return this.id;
     }
     public String getName(){
-        return this.name;
+        return this.Ename;
     }
     public String getlocation(){
         return this.location;
@@ -99,5 +114,29 @@ public class Event {
     }
     public String getDate(){
         return this.SDate;
+    }
+
+    public int getyear() {
+        return year;
+    }
+
+    public int getmonth() {
+        return month;
+    }
+
+    public int getday() {
+        return day;
+    }
+
+    public int gethour() {
+        return hour;
+    }
+
+    public int getminute() {
+        return minute;
+    }
+
+    public boolean getnotification() {
+        return notification;
     }
 }

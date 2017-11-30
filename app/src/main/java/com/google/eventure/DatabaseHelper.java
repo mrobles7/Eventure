@@ -27,16 +27,16 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "StudenAndEvent";
+    private static final String DATABASE_NAME = "database";
 
     // Table Names
-    private static final String TABLE_TODO = "todos"; //Student
-    private static final String TABLE_TAG = "tags"; //Event
-    private static final String TABLE_TODO_TAG = "todo_tags";//Student_Event
+    private static final String TABLE_EVENT = "EVENT"; //Event
+    private static final String TABLE_STUDENT = "STUDENT"; //Student
+    private static final String TABLE_STUDENT_EVENT = "student_event";//Student_Event
 
     // Common column names
     private static final String KEY_ID = "id";
-    private static final String KEY_CREATED_AT = "created_at";
+
 
     // NOTES Table - column nmaes
     private static final String KEY_Name = "name";
@@ -50,85 +50,66 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String  KEY_day = "day";
     private static final String  KEY_hour = "hour";
     private static final String  KEY_minute = "minute";
-    private static final String  KEY_Ehour= "Ehour";
-    private static final String  KEY_Eminute= "Eminute";
-    private static final String  KEY_EventDate = "EventDate";
-    private static final String  KEY_FormattedDate = "FormattedDate";
     private static final String  KEY_location = "location";
     private static final String  KEY_description = "description";
-    private static final String  KEY_name = "name";
+    private static final String  KEY_Ename = "Ename";
     private static final String  KEY_notification= "notification";
-    private static final String  KEY_start = "start";
-    private static final String  KEY_end= "end";
 
-    /*
-
-      int id, year, month, day, hour, minute, Ehour, Eminute;
-    String EventDate;
-    Date FormattedDate;
-    String location;
-    String description;
-    String name;
-    Date NotifDate;
-    String notifTime;
-    String Start;
-    String End;
-
-     */
 
 
     // NOTE_TAGS Table - column names
-  //  private static final String KEY_TODO_ID = "todo_id";
-  //  private static final String KEY_TAG_ID = "tag_id";
+    private static final String KEY_STUDENT_ID = "student_id";
+    private static final String KEY_EVENT_ID = "event_id";
 
-    // Table Create Statements
-    // Todo table create statement
-    private static final String CREATE_TABLE_TODO = "CREATE TABLE "
-            + TABLE_TODO + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_Name
+    public static final String CREATE_TABLE_STUDENT = "CREATE TABLE "
+            + TABLE_STUDENT + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_Name
             + " TEXT," + KEY_Username + " Text," + KEY_password
             + " Text" + ")";
 
-    // Event table create statement
-    private static final String CREATE_TABLE_TAG = "CREATE TABLE " + TABLE_TAG
+
+    public static final String CREATE_TABLE_EVENT = "CREATE TABLE " + TABLE_EVENT
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_year+ " INTEGER,"
             + KEY_month+ " INTEGER," + KEY_day+ " INTEGER," + KEY_hour+ " INTEGER,"
-            +KEY_minute+ " INTEGER," +KEY_Ehour+ " INTEGER," + KEY_Eminute+ " INTEGER,"
-            + KEY_EventDate+ " Text,"+ KEY_FormattedDate + " DATE,"+ KEY_location + " Text,"
-            + KEY_name+ " Text,"+ KEY_notification + " DATE,"+ KEY_start + " Text,"
-            + KEY_end+ " Text,"+ KEY_description + " Text,"
-            +")";
-/*
-    // todo_tag table create statement
-    private static final String CREATE_TABLE_TODO_TAG = "CREATE TABLE "
-            + TABLE_TODO_TAG + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
-            + KEY_TODO_ID + " INTEGER," + KEY_TAG_ID + " INTEGER,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
-*/
+            +KEY_minute+ " INTEGER," + KEY_location + " Text," + KEY_Ename+ " Text,"
+            + KEY_notification + " DATE," + KEY_description + " Text"
+            + ")";
+
+    public static final String CREATE_TABLE_STUDENT_EVENT = "CREATE TABLE "
+            + TABLE_STUDENT_EVENT + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_STUDENT_ID + " INTEGER," + KEY_EVENT_ID + " INTEGER"
+            + ")";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+       // context.deleteDatabase(DATABASE_NAME);
+        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         // creating required tables
-        db.execSQL(CREATE_TABLE_TODO);
-        //db.execSQL(CREATE_TABLE_TAG);
-       // db.execSQL(CREATE_TABLE_TODO_TAG);
+        db.execSQL(CREATE_TABLE_EVENT);
+        db.execSQL(CREATE_TABLE_STUDENT);
+        db.execSQL(CREATE_TABLE_STUDENT_EVENT);
+
+        Log.d("Created", "Created Both the Tables");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TODO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAG);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TODO_TAG);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_EVENT);
 
         // create new tables
         onCreate(db);
 
     }
 
+
+    //---------------CREATE STUDENT------------//
     public long createStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -138,19 +119,14 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         values.put(KEY_password, student.getPassword());
 
         // insert row
-        long todo_id = db.insert(TABLE_TODO, null, values);
+        long todo_id = db.insert(TABLE_STUDENT, null, values);
 
-        // assigning tags to todo
-       /* for (long tag_id : tag_ids) {
-            createTodoTag(todo_id, tag_id);
-        }
-*/
         return todo_id;
     }
-
+    //--------------GET LIST OF STUDENTS--------------//
     public List<Student> getAllStudents() {
-        List<Student> todos = new ArrayList<Student>();
-        String selectQuery = "SELECT  * FROM " + TABLE_TODO;
+        List<Student> students = new ArrayList<Student>();
+        String selectQuery = "SELECT  * FROM " + TABLE_STUDENT;
 
         Log.e(LOG, selectQuery);
 
@@ -160,37 +136,68 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
-                Student td = new Student();
-                td.setID(c.getInt((c.getColumnIndex(KEY_ID))));
-                td.setName((c.getString(c.getColumnIndex(KEY_Name))));
-                td.setUsermame(c.getString(c.getColumnIndex(KEY_Username)));
-                td.setPassword(c.getString(c.getColumnIndex(KEY_password)));
+                Student st = new Student();
+                st.setID(c.getInt((c.getColumnIndex(KEY_ID))));
+                st.setName((c.getString(c.getColumnIndex(KEY_Name))));
+                st.setUsermame(c.getString(c.getColumnIndex(KEY_Username)));
+                st.setPassword(c.getString(c.getColumnIndex(KEY_password)));
                 // adding to todo list
-                todos.add(td);
+                students.add(st);
             } while (c.moveToNext());
         }
 
-        return todos;
+        return students;
     }
-
-    public long createEvent(Event event) {
+    //--------KEEP TRACK OF STUDENTS AND EVENTS-----------//
+    public long createStudentEvent(long event_id, long student_id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_EVENT_ID, event_id);
+        values.put(KEY_STUDENT_ID, student_id);
 
+
+        long id = db.insert(TABLE_STUDENT_EVENT, null, values);
+
+        return id;
+    }
+    //----------CREATE EVENTS LINKED TO STUDENTS-------------//
+    public long createEvent(Event event,long[] student_ids) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_Ename, event.getName());
+        values.put(KEY_year, event.getyear());
+        values.put(KEY_month, event.getmonth());
+        values.put(KEY_day, event.getday());
+        values.put(KEY_minute, event.getminute());
+        values.put(KEY_hour, event.gethour());
+        values.put(KEY_location, event.getlocation());
+        values.put(KEY_description, event.getDescription());
+        values.put(KEY_notification, event.getnotification());
 
         // insert row
-        long tag_id = db.insert(TABLE_TAG, null, values);
+        long event_id = db.insert(TABLE_EVENT, null, values);
 
-        return tag_id;
+
+        // assigning tags to todo
+       for (long s_id : student_ids) {
+            createStudentEvent(event_id, s_id);
+        }
+
+
+        return event_id;
     }
 
-    /**
-     * getting all tags
-     *
-    public List<Tag> getAllTags() {
-        List<Tag> tags = new ArrayList<Tag>();
-        String selectQuery = "SELECT  * FROM " + TABLE_TAG;
+                /*get all events under a student*/
+    public List<Event> getAllEventsByStudent(String Student_password) {
+        List<Event> events = new ArrayList<Event>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_EVENT + " EV, "
+                + TABLE_STUDENT+ " ST, " + TABLE_STUDENT_EVENT+ " SE WHERE ST."
+                + KEY_password+ " = '" + Student_password + "'" + " AND ST." + KEY_ID
+                + " = " + "SE." + KEY_STUDENT_ID + " AND EV." + KEY_ID + " = "
+                + "SE." + KEY_EVENT_ID;
 
         Log.e(LOG, selectQuery);
 
@@ -200,14 +207,22 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
-                Tag t = new Tag();
+                Event t = new Event();
                 t.setId(c.getInt((c.getColumnIndex(KEY_ID))));
-                t.setTagName(c.getString(c.getColumnIndex(KEY_TAG_NAME)));
+                t.setName(c.getString(c.getColumnIndex(KEY_Ename)));
+                t.setYear(c.getInt(c.getColumnIndex(KEY_year)));
+                t.setlocation(c.getString(c.getColumnIndex(KEY_location)));
+                t.setdescription(c.getString(c.getColumnIndex(KEY_description)));
+                t.setmonth(c.getInt(c.getColumnIndex(KEY_month)));
+                t.setday(c.getInt(c.getColumnIndex(KEY_day)));
+                t.sethour(c.getInt(c.getColumnIndex(KEY_hour)));
+                t.setMinute(c.getInt(c.getColumnIndex(KEY_minute)));
 
-                // adding to tags list
-                tags.add(t);
+                // adding to todo list
+                events.add(t);
             } while (c.moveToNext());
         }
-        return tags;
-    }*/
+
+        return events;
+    }
 }

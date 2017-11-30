@@ -13,12 +13,11 @@ import android.widget.TextView;
 import java.util.List;
 import android.widget.Toast;
 import android.util.Log;
+
+
 public class LoginActivity extends AppCompatActivity
 {
-
-    public static  long Student1_id;
-    public static Student Student1;
-
+    public static Student student;
 
     Button btnlogin;
     DatabaseHelper db;
@@ -73,23 +72,19 @@ public class LoginActivity extends AppCompatActivity
                          storedUsername = st.getPassword();
                         //   check if the Stored password matches with  Password entered by user
                         if (password.equals(storedUsername) && userName.equals(storedPassword)) {
-
+                            student= st;
                             Intent login = new Intent(LoginActivity.this, ScheduleActivity.class);
                             LoginActivity.this.startActivity(login);
 
                         }
-
-                        else{
-                            Toast.makeText(LoginActivity.this,"Wrong user name or password ", Toast.LENGTH_LONG).show();
-                        }
-
                     }
-
-
+                    //Toast.makeText(LoginActivity.this,"Wrong user name or password ", Toast.LENGTH_LONG).show();
                 }
             });
 
         }
+
+
 
         @Override
         protected void onDestroy() {
