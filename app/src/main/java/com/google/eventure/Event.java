@@ -109,7 +109,7 @@ public class Event {
         return rs;
     }
     public String getEnd(){
-        String rs = EHour +":" + EMinute;
+        String rs = EHour + ":" + EMinute;
         return rs;
     }
     public String getDate(){

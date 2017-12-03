@@ -25,7 +25,7 @@
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="@+id/nextDay"
         app:layout_constraintEnd_toStartOf="@+id/nextDay"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/prevButton"
         app:layout_constraintTop_toTopOf="@+id/nextDay" />
 
     <Button
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/prevButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
