@@ -1,10 +1,9 @@
 package com.google.eventure;
 
-import android.icu.text.SimpleDateFormat;
+
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Calendar;
-import java.util.TimeZone;
+
 
 /**
  * Created by ReignNelson on 10/8/17.
@@ -50,7 +49,7 @@ public class Event {
     private Date convertStringtoDate (String dateString)
     {
         Date FDate = null;
-        DateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd/HH/mm");
+        DateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd/kk/mm");
         try{
             FDate = df.parse(dateString);
         }catch(Exception EX) {
@@ -88,6 +87,8 @@ public class Event {
         this.hour=hour;
     }
     public void setDate(String Date){
+        // Should be in the format:
+        // Four digit year/Two digit month/Two digit Day/Hour of day 1-24/Minutes in hour
         this.SDate=Date;
         this.StartDate = convertStringtoDate(Date);
     }
