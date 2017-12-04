@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import java.util.List;
+
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,30 +52,38 @@ public class RegisterActivity extends AppCompatActivity {
                 String Name = editName.getText().toString();
                 String userName = editUsername.getText().toString();
                 String password = editPassword.getText().toString();
-                // String confirmPassword=editTextConfirmPassword.getText().toString();
 
-                // check if any of the fields are vaccant
-             /*  if(userName.equals("")||password.equals("")||confirmPassword.equals(""))
-                {
-                    Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
-                    return;
-                }*/
-                // check if both password matches
-               /* if(!password.equals(confirmPassword))
-                {
-                    Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
-                    return;
-                }*/
-                // else
-                //{
+                List<Student> students = db.getAllStudents();
+                for (Student student : students) {
+
+                    if(student.getUsername().equals(userName)){
+                        Toast.makeText(getApplicationContext(), "Username already taken ", Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+
+
                 // Save the Data in Database
 
                 Student student = new Student();
+                student.setID(1);
                 student.setName(Name);
                 student.setUsermame(userName);
                 student.setPassword(password);
 
                student.setID(db.createStudent(student));
+
+                Event Event1 = new Event(1,2017,12,5,3,30,0,0,0,0,"Final class","BIO","COB2");
+                Event Event2 = new Event(2,2017,12,6,3,30,0,0,0,0,"Final class","BIO","COB2");
+                Event Event3 = new Event(3,2017,12,7,3,30,0,0,0,0,"Final class","BIO","COB2");
+                Event Event4 = new Event(4,2017,12,8,3,30,0,0,0,0,"Final class","BIO","COB2");
+
+
+                long Event1_id = db.createEvent(Event1, new long[]{student.getID()});
+                long Event2_id = db.createEvent(Event2, new long[]{student.getID()});
+                long Event3_id = db.createEvent(Event3, new long[]{student.getID()});
+                long Event4_id = db.createEvent(Event4, new long[]{student.getID()});
 
 
                 Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
