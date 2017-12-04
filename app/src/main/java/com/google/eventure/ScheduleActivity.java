@@ -20,6 +20,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
         final TextView Date = (TextView) findViewById(R.id.date);
+        final Button buttonSuggest = (Button) findViewById(R.id.btnSuggest);
+        final Button buttonEditEvent = (Button) findViewById(R.id.buttonEdit);
 
 
         String currentDateString = DateFormat.getDateInstance().format(new Date());
@@ -27,7 +29,19 @@ public class ScheduleActivity extends AppCompatActivity {
         // textView is the TextView view that should display it
         Date.setText(currentDateString);
 
-        Button buttonEditEvent = (Button) findViewById(R.id.buttonEdit);
+
+        buttonSuggest.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            //This will happen when clicked
+            public void onClick(View v)
+            {
+                //We say we are in LoginActivity and to open the intent
+                Intent EditIntent = new Intent(ScheduleActivity.this, SuggestActivity.class);
+                ScheduleActivity.this.startActivity(EditIntent);
+            }
+        });
+
         buttonEditEvent.setOnClickListener(new View.OnClickListener()
         {
             @Override
