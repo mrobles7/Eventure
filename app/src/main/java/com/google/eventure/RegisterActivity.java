@@ -74,16 +74,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                student.setID(db.createStudent(student));
 
-                Event Event1 = new Event(1,2017,12,5,3,30,0,0,0,0,"Final class","BIO","COB2");
-                Event Event2 = new Event(2,2017,12,6,3,30,0,0,0,0,"Final class","BIO","COB2");
-                Event Event3 = new Event(3,2017,12,7,3,30,0,0,0,0,"Final class","BIO","COB2");
-                Event Event4 = new Event(4,2017,12,8,3,30,0,0,0,0,"Final class","BIO","COB2");
 
 
-                long Event1_id = db.createEvent(Event1, new long[]{student.getID()});
-                long Event2_id = db.createEvent(Event2, new long[]{student.getID()});
-                long Event3_id = db.createEvent(Event3, new long[]{student.getID()});
-                long Event4_id = db.createEvent(Event4, new long[]{student.getID()});
+
+
 
 
                 Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();

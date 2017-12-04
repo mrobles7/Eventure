@@ -105,13 +105,11 @@ public class Event {
     public String getDescription(){
         return this.description;
     }
-    public String getStart() {
-        String rs= hour + ":" + minute;
-        return rs;
+    public Date getStart() {
+        return StartDate;
     }
-    public String getEnd(){
-        String rs = EHour + ":" + EMinute;
-        return rs;
+    public Date getEnd(){
+        return EndDate;
     }
     public String getDate(){
         return this.SDate;
