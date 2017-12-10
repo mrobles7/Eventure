@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -46,64 +46,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:src="@mipmap/ic_launcher" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Google Workshop"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="30sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView2"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Intel Resume Workshop"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:textSize="30sp" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_launcher" />
-
-            </RelativeLayout>
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
 
