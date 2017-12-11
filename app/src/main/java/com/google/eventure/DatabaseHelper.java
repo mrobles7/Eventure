@@ -21,6 +21,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper  extends SQLiteOpenHelper {
 
+
+    private Student student;
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
@@ -108,6 +110,13 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     }
 
+    public void SetCurrentStudent(Student student){
+
+       this.student=student;
+    }
+    public Student GetCurrentStudent(){
+        return this.student;
+    }
 
     //---------------CREATE STUDENT------------//
     public long createStudent(Student student) {
@@ -225,4 +234,6 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         return events;
     }
+
+
 }

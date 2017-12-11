@@ -16,7 +16,7 @@ import java.util.Date;
  */
 
 public class EventSuggest extends DatabaseHelper {
-    List <Event> plannedEvents;
+
     Student student;
     ArrayList<Event> possibleEvents = new ArrayList<Event>(4);
     Event Event1 = new Event(1,2017,12,5,3,30,5,30,0,
@@ -51,7 +51,7 @@ public class EventSuggest extends DatabaseHelper {
         //given what a student is currently going to
 
         //list of all events a student currently has going on
-        plannedEvents = getAllEventsByStudent(student.getUsername() );
+        List <Event> plannedEvents = getAllEventsByStudent(student.getPassword() );
         //list of events a student could possibly go to
         ArrayList<Event> PE = new ArrayList<Event>();
         //populate the list with all possible events

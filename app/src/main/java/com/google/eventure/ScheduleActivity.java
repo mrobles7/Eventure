@@ -23,6 +23,7 @@ import java.util.List;
 
 public class ScheduleActivity extends LoginActivity {
 
+    public Student St;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Makes sure that the keyboard doesn't automatically pops up
@@ -48,7 +49,7 @@ public class ScheduleActivity extends LoginActivity {
             mContext = getApplicationContext();
 
             // Change the action bar color
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+//            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
 
             // Get the widgets reference from XML layout
             mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
@@ -56,7 +57,7 @@ public class ScheduleActivity extends LoginActivity {
 
             DatabaseHelper db;
             db = new DatabaseHelper(getApplicationContext());
-            List<Event> events = db.getAllEventsByStudent( student.getPassword() );
+            List<Event> events = db.getAllEventsByStudent(student.getPassword() );
             for (Event event : events) {
 
                 // Initialize a new CardView

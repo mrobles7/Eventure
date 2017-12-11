@@ -13,18 +13,15 @@ import android.widget.Toast;
 import java.util.List;
 
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends LoginActivity {
 
     // SQLiteOpenHelper openHelper;
     //initialize database
     // DBHandler db;
 
-
     Button btnlogin;
     DatabaseHelper db;
 
-    public static Student Student1;
-    public static long Student1_id;
 
     @Override
 
@@ -56,28 +53,23 @@ public class RegisterActivity extends AppCompatActivity {
                 List<Student> students = db.getAllStudents();
                 for (Student student : students) {
 
-                    if(student.getUsername().equals(userName)){
-                        Toast.makeText(getApplicationContext(), "Username already taken ", Toast.LENGTH_LONG).show();
 
-                    }
                 }
 
 
 
                 // Save the Data in Database
 
-                Student student = new Student();
-                student.setID(1);
-                student.setName(Name);
-                student.setUsermame(userName);
-                student.setPassword(password);
+                Student student1 = new Student();
+                student1.setID(1);
+                student1.setName(Name);
+                student1.setUsermame(userName);
+                student1.setPassword(password);
 
-               student.setID(db.createStudent(student));
-
-
+               student1.setID(db.createStudent(student));
 
 
-
+               student = student1;
 
 
                 Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
