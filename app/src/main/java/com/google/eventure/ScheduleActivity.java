@@ -11,6 +11,7 @@ import android.support.v7.widget.CardView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager; // Added in for use to prevent keyboard pop up
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,9 @@ public class ScheduleActivity extends LoginActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Makes sure that the keyboard doesn't automatically pops up
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
