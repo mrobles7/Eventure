@@ -18,8 +18,12 @@ public class Event {
     boolean notification;
 
     public Event(){
-
+    /*
+    so this is the useless constuctor that needs to be here so that the android studio doesn't yell at us
+    this is literally the only reason this never used constructor is here.
+    */
     }
+
     public Event (int id, int year, int month, int day, int hour, int minute, int EHour, int EMinute, int NHour, int NMinute,
                   String Description, String Name, String Location)
     {
@@ -58,6 +62,7 @@ public class Event {
         }
         return FDate;
     }
+
 
     public void setId(int id){
         this.id=id;

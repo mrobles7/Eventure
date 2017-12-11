@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventActivity extends LoginActivity {
@@ -31,7 +32,19 @@ public class EventActivity extends LoginActivity {
         final EditText textStartHour = (EditText) findViewById((R.id.txtStartHour));
         final EditText textStartMinute = (EditText) findViewById((R.id.txtStartMinute));
         final EditText textNote = (EditText) findViewById((R.id.txtNote));
+        final EditText textRepeat = (EditText) findViewById((R.id.txtRepeat));
         final Button buttonSave = (Button) findViewById(R.id.btnSave);
+        final Button buttonScrap = (Button) findViewById((R.id.btnScrap));
+
+        buttonScrap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Event Deleted.", Toast.LENGTH_LONG).show();
+
+                Intent EventIntent = new Intent(EventActivity.this, ScheduleActivity.class);
+                startActivity(EventIntent);
+            }
+        });
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,20 +62,26 @@ public class EventActivity extends LoginActivity {
                     int EMinute = Integer.parseInt(textEndMinute.getText().toString());
                     int NHour = Integer.parseInt(textNotifHour.getText().toString());
                     int NMinute = Integer.parseInt(textNotifMinute.getText().toString());
+                    int Repeat = Integer.parseInt((textRepeat.getText().toString()));
 
-                    // then create the event
-                    Event Event1 = new Event(IDcounter += 1, year, month, day, SHour, SMinute, EHour, EMinute, NHour, NMinute,
-                            textNote.getText().toString(), textEvent.getText().toString(), textLoc.getText().toString());
+                    //create a new list of events to be added
+                    ArrayList<Event> toAdd = new ArrayList<>(Repeat);
 
+                    for(int i = 0; i < Repeat; i ++) {
+                        // then create the event
+                        Event Event1 = new Event(IDcounter += 1, year, month, (day + 7*i ) , SHour, SMinute, EHour, EMinute, NHour, NMinute,
+                                textNote.getText().toString(), textEvent.getText().toString(), textLoc.getText().toString());
+                        toAdd.add(Event1);
+                    }
                     db = new DatabaseHelper(getApplicationContext());
 
-                    // add the event to database
-                    long Event1_id = db.createEvent(Event1, new long[]{student.getID()});
-
-                    if (Event1_id != -1) {
+                    for(Event e: toAdd ) {
+                        // add the event to database
+                        long Event1_id = db.createEvent(e, new long[]{student.getID()});
+                        }
+                    if (toAdd.size() > 0) {
                         Toast.makeText(getApplicationContext(), "event succesfully added.", Toast.LENGTH_LONG).show();
                     }
-
                 } catch (Exception EX) {
                     Toast.makeText(getApplicationContext(), "Please make sure that all values for time & date are integer values.", Toast.LENGTH_LONG).show();
                 }
