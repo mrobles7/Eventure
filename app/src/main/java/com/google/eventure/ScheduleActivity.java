@@ -16,10 +16,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.Window;
+
+import java.sql.Struct;
 import java.util.Calendar;
 import java.text.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
 public class ScheduleActivity extends LoginActivity {
 
@@ -29,13 +32,32 @@ public class ScheduleActivity extends LoginActivity {
         // Makes sure that the keyboard doesn't automatically pops up
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        final class displace {
+            int displacement = 0;
+            displace(){}
+            public int GetDis(){
+                return displacement;
+            }
+            public void Inc(){
+                displacement ++;
+            }
+            public void Dec(){
+                displacement--;
+            }
+        }
 
-        final TextView Date = (TextView) findViewById(R.id.date);
+        final Date Now = new Date();
+        final displace D = new displace();
+        final String currentDateString = DateFormat.getDateInstance().format(Now);
+        final TextView textDate = (TextView) findViewById(R.id.date);
         final Button buttonSuggest = (Button) findViewById(R.id.btnSuggest);
         final Button buttonEditEvent = (Button) findViewById(R.id.buttonEdit);
+        final Button buttonPrev = (Button) findViewById((R.id.btnPrev));
+        final Button buttonNext = (Button) findViewById((R.id.btnNext));
 
         LinearLayout mRelativeLayout;
 
@@ -96,10 +118,10 @@ public class ScheduleActivity extends LoginActivity {
                 mRelativeLayout.addView(card);
 
             }
-        String currentDateString = DateFormat.getDateInstance().format(new Date());
+
 
         // textView is the TextView view that should display it
-        Date.setText(currentDateString);
+        textDate.setText(currentDateString);
 
 
         buttonSuggest.setOnClickListener(new View.OnClickListener()
@@ -126,6 +148,35 @@ public class ScheduleActivity extends LoginActivity {
                 ScheduleActivity.this.startActivity(EditIntent);
             }
         });
-
+        buttonPrev.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            //This will happen when clicked
+            public void onClick(View v)
+            {
+                //get the date in the top date counter to be one day prev
+                D.Dec();
+                Calendar c = Calendar.getInstance();
+                c.setTime(Now);
+                c.add(Calendar.DATE, D.GetDis());
+                Date d = c.getTime();
+                textDate.setText(DateFormat.getDateInstance().format(d));
+            }
+        });
+        buttonNext.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            //This will happen when clicked
+            public void onClick(View v)
+            {
+                //get the date in the top date counter to be the next day
+                D.Inc();
+                Calendar c = Calendar.getInstance();
+                c.setTime(Now);
+                c.add(Calendar.DATE, D.GetDis());
+                Date d = c.getTime();
+                textDate.setText(DateFormat.getDateInstance().format(d));
+            }
+        });
     }
 }

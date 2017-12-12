@@ -23,13 +23,13 @@
         android:layout_height="0dp"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="@+id/nextDay"
-        app:layout_constraintEnd_toStartOf="@+id/nextDay"
-        app:layout_constraintStart_toEndOf="@+id/prevButton"
-        app:layout_constraintTop_toTopOf="@+id/nextDay" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnNext"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintStart_toEndOf="@+id/btnPrev"
+        app:layout_constraintTop_toTopOf="@+id/btnNext" />
 
     <Button
-        android:id="@+id/nextDay"
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/prevButton"
+        android:id="@+id/btnPrev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
@@ -55,19 +55,21 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingBottom="90dp"
         android:paddingLeft="45dp"
         android:paddingRight="45dp"
         android:paddingTop="90dp"
-        tools:context="com.google.eventure.SandBoxActivity">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="com.google.eventure.SandBoxActivity"
+        tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
             android:id="@+id/rl_Container"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="schemas.android.com/apk/res-auto"

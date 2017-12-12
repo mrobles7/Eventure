@@ -184,27 +184,29 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Start Time"
-        app:layout_constraintBottom_toTopOf="@+id/txtStartHour"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="63dp"
         android:layout_height="21dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="End Time"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
 
     <EditText
         android:id="@+id/txtStartMinute"
@@ -258,22 +260,6 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/txt1"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Repeat for: "
-        app:layout_constraintBottom_toBottomOf="@+id/txtRepeat"
-        app:layout_constraintEnd_toStartOf="@+id/txtRepeat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtRepeat"
-        app:layout_constraintVertical_bias="0.71000004" />
-
-    <EditText
         android:id="@+id/txtRepeat"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -306,5 +292,21 @@
         app:layout_constraintStart_toEndOf="@+id/btnSave"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.968" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Repeat for: "
+        app:layout_constraintBottom_toBottomOf="@+id/txtRepeat"
+        app:layout_constraintEnd_toStartOf="@+id/txtRepeat"
+        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtRepeat"
+        app:layout_constraintVertical_bias="0.7" />
 
 </android.support.constraint.ConstraintLayout>
