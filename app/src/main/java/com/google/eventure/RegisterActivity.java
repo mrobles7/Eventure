@@ -50,13 +50,6 @@ public class RegisterActivity extends LoginActivity {
                 String userName = editUsername.getText().toString();
                 String password = editPassword.getText().toString();
 
-                List<Student> students = db.getAllStudents();
-                for (Student student : students) {
-
-
-                }
-
-
 
                 // Save the Data in Database
 
@@ -66,7 +59,7 @@ public class RegisterActivity extends LoginActivity {
                 student1.setUsermame(userName);
                 student1.setPassword(password);
 
-               student1.setID(db.createStudent(student));
+               student1.setID(db.createStudent(student1));
 
 
                student = student1;

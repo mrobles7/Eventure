@@ -143,4 +143,11 @@ public class Event {
     public boolean getnotification() {
         return notification;
     }
+
+    public int getEMinute() {
+        return EMinute;
+    }
+    public int getEHour() {
+        return EHour;
+    }
 }

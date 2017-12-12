@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.Window;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +35,7 @@ public class SuggestActivity extends LoginActivity {
 
 
 
-    List<Event> SuggestEvent() {
+    List<Event> SuggestEvent() throws ParseException {
         //returns a list of possible events to go to
         //given what a student is currently going to
         //list of all events a student currently has going on
@@ -55,8 +57,25 @@ public class SuggestActivity extends LoginActivity {
                 Date PES = PE.get(i).getStart();
                 Date PEE = PE.get(i).getEnd();
                 for(Event events : plannedEvents){
-                    Date planES = events.getStart();
-                    Date planEE = events.getEnd();
+                    Date planES=null;
+                    DateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd/kk/mm");
+                    try{
+                    planES =df.parse(events.getyear()+"/"+events.getmonth()+"/"+events.getday()+"/"
+                            +events.gethour()+"/"+events.getminute());
+                    }catch(Exception EX) {
+                        System.out.println("System failed to parse the date\nError Code: " + EX);
+
+                    }
+
+                    Date planEE =null;
+                    DateFormat de = new java.text.SimpleDateFormat("yyyy/MM/dd/kk/mm");
+                    try{
+                        planEE=de.parse(events.getyear()+"/"+events.getmonth()+"/"+events.getday()+"/"+events.getEHour()+"/"+events.getEMinute());
+                    }catch(Exception EX) {
+                        System.out.println("System failed to parse the date\nError Code: " + EX);
+
+                    }
+
                     //if any times match, remove the event,
                     //if the start or end time of the possible events
                     //is between the start and end time of a class,
@@ -104,7 +123,12 @@ public class SuggestActivity extends LoginActivity {
         int height =-2;
 
 
-        List<Event> events = SuggestEvent();
+        List<Event> events = null;
+        try {
+            events = SuggestEvent();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         for (Event event : events) {
 
             // Initialize a new CardView
