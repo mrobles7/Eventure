@@ -12,6 +12,16 @@ import java.util.List;
 
 public class EventActivity extends LoginActivity {
     DatabaseHelper db;
+    Event event;
+    public void setEvent(Event e){
+        event=e;
+    }
+
+    public Event getEvent(){
+        return this.event;
+    }
+
+
 
     static int IDcounter = 0;
 
@@ -20,21 +30,30 @@ public class EventActivity extends LoginActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
-        final EditText textEvent = (EditText) findViewById((R.id.txtEvent));
-        final EditText textLoc = (EditText) findViewById((R.id.txtLoc));
-        final EditText textEndMinute = (EditText) findViewById((R.id.txtEndMinute));
-        final EditText textEndHour = (EditText) findViewById((R.id.txtEndHour));
-        final EditText textNotifHour = (EditText) findViewById((R.id.txtNotifHour));
-        final EditText textNotifMinute = (EditText) findViewById((R.id.txtNotifMinute));
-        final EditText textYear = (EditText) findViewById((R.id.txtYear));
-        final EditText textMonth = (EditText) findViewById((R.id.txtMonth));
-        final EditText textDay = (EditText) findViewById((R.id.txtDay));
-        final EditText textStartHour = (EditText) findViewById((R.id.txtStartHour));
-        final EditText textStartMinute = (EditText) findViewById((R.id.txtStartMinute));
-        final EditText textNote = (EditText) findViewById((R.id.txtNote));
-        final EditText textRepeat = (EditText) findViewById((R.id.txtRepeat));
-        final Button buttonSave = (Button) findViewById(R.id.btnSave);
-        final Button buttonScrap = (Button) findViewById((R.id.btnScrap));
+
+
+            final EditText textEvent = (EditText) findViewById((R.id.txtEvent));
+            final EditText textLoc = (EditText) findViewById((R.id.txtLoc));
+            final EditText textEndMinute = (EditText) findViewById((R.id.txtEndMinute));
+            final EditText textEndHour = (EditText) findViewById((R.id.txtEndHour));
+            final EditText textNotifHour = (EditText) findViewById((R.id.txtNotifHour));
+            final EditText textNotifMinute = (EditText) findViewById((R.id.txtNotifMinute));
+            final EditText textYear = (EditText) findViewById((R.id.txtYear));
+            final EditText textMonth = (EditText) findViewById((R.id.txtMonth));
+            final EditText textDay = (EditText) findViewById((R.id.txtDay));
+            final EditText textStartHour = (EditText) findViewById((R.id.txtStartHour));
+            final EditText textStartMinute = (EditText) findViewById((R.id.txtStartMinute));
+            final EditText textNote = (EditText) findViewById((R.id.txtNote));
+            final EditText textRepeat = (EditText) findViewById((R.id.txtRepeat));
+            final Button buttonSave = (Button) findViewById(R.id.btnSave);
+            final Button buttonScrap = (Button) findViewById((R.id.btnScrap));
+
+        if(event!=null){
+
+            textMonth.setText(event.getmonth());
+
+        }
+
 
         buttonScrap.setOnClickListener(new View.OnClickListener() {
             @Override

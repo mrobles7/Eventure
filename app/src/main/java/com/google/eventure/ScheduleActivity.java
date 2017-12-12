@@ -101,16 +101,16 @@ public class ScheduleActivity extends LoginActivity {
             mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
             int height =-2;
 
-            DatabaseHelper db;
+            final DatabaseHelper db;
             db = new DatabaseHelper(getApplicationContext());
             List<Event> events = db.getAllEventsByStudent(student.getPassword() );
-            for (Event event : events) {
-                int EGD, EGM, DGD, DGM;
+            for (final Event event : events) {
+              /*  int EGD, EGM, DGD, DGM;
                 EGD = event.getday();
                 EGM = event.getmonth();
                 DGD = D.getDOM();
                 DGM = D.getMON();
-                if( event.getday() == D.getDOM() && event.getmonth() == D.getMON() ) {
+                if( event.getday() == D.getDOM() && event.getmonth() == D.getMON() )*/ {
                     // Initialize a new CardView
                     CardView card = new CardView(mContext);
 
@@ -149,6 +149,15 @@ public class ScheduleActivity extends LoginActivity {
 
                     // Finally, add the CardView in root layout
                     mRelativeLayout.addView(card);
+                    card.setOnClickListener(new CardView.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            EventActivity newevent = new EventActivity();
+                            newevent.setEvent(event);
+                            Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
 
