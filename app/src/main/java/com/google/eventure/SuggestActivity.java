@@ -1,20 +1,15 @@
 package com.google.eventure;
 
+import android.content.Intent;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.Window;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -129,13 +124,13 @@ public class SuggestActivity extends LoginActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        for (Event event : events) {
+        for (final Event event : events) {
 
             // Initialize a new CardView
             CardView card = new CardView(mContext);
 
             // Set the CardView layoutParams
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height-=2);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
             card.setLayoutParams(params);
 
             // Set CardView corner radius
@@ -165,9 +160,15 @@ public class SuggestActivity extends LoginActivity {
 
             // Finally, add the CardView in root layout
             mRelativeLayout.addView(card);
-
+            card.setOnClickListener(new CardView.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    db.createEvent(event, new long[]{student.getID()});
+                    Intent intent = new Intent(SuggestActivity.this, ScheduleActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
-
     }
 
 }
