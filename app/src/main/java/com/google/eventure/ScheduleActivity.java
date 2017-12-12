@@ -36,24 +36,48 @@ public class ScheduleActivity extends LoginActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        //this is a containment class.  It's purpose is to
+        //contain the displacement from the current date to
+        //the date shown in the app and the date being shown
         final class displace {
+            //how far away from today are we?
             int displacement = 0;
-            displace(){}
-            public int GetDis(){
-                return displacement;
+            //todays date, date currently being shown
+            Date TodayDate,disDate;
+            displace(Date d){
+                TodayDate = d;
+                disDate = d;
             }
             public void Inc(){
-                displacement ++;
+                displacement++;
             }
             public void Dec(){
                 displacement--;
             }
+            Date ChangeDate(){
+                Calendar c = Calendar.getInstance();
+                c.setTime(TodayDate);
+                c.add(Calendar.DATE, displacement);
+                return disDate = c.getTime();
+            }
+            int getDOM(){
+                Calendar c = Calendar.getInstance();
+                c.setTime(disDate);
+                return c.get(Calendar.DAY_OF_MONTH);
+            }
+            int getMON(){
+                Calendar c = Calendar.getInstance();
+                c.setTime(disDate);
+                return c.get(Calendar.MONTH);
+            }
+
         }
 
+
         final Date Now = new Date();
-        final displace D = new displace();
+        final displace D = new displace(Now);
         final String currentDateString = DateFormat.getDateInstance().format(Now);
-        final TextView textDate = (TextView) findViewById(R.id.date);
+        final TextView textDate = (TextView) findViewById(R.id.txtDate);
         final Button buttonSuggest = (Button) findViewById(R.id.btnSuggest);
         final Button buttonEditEvent = (Button) findViewById(R.id.buttonEdit);
         final Button buttonPrev = (Button) findViewById((R.id.btnPrev));
@@ -81,46 +105,47 @@ public class ScheduleActivity extends LoginActivity {
             db = new DatabaseHelper(getApplicationContext());
             List<Event> events = db.getAllEventsByStudent(student.getPassword() );
             for (Event event : events) {
+                int EGD, EGM, DGD, DGM;
+                EGD = event.getday();
+                EGM = event.getmonth();
+                DGD = D.getDOM();
+                DGM = D.getMON();
+                if( event.getday() == D.getDOM() && event.getmonth() == D.getMON() ) {
+                    // Initialize a new CardView
+                    CardView card = new CardView(mContext);
 
-                // Initialize a new CardView
-                CardView card = new CardView(mContext);
+                    // Set the CardView layoutParams
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
+                    card.setLayoutParams(params);
 
-                // Set the CardView layoutParams
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height-=2);
-                card.setLayoutParams(params);
+                    // Set CardView corner radius
+                    card.setRadius(9);
 
-                // Set CardView corner radius
-                card.setRadius(9);
+                    // Set cardView content padding
+                    card.setContentPadding(15, 15, 15, 15);
 
-                // Set cardView content padding
-                card.setContentPadding(15, 15, 15, 15);
+                    // Set a background color for CardView
+                    card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
 
-                // Set a background color for CardView
-                card.setCardBackgroundColor(Color.parseColor("#00008B"));
+                    // Set the CardView maximum elevation
+                    card.setMaxCardElevation(15);
 
-                // Set the CardView maximum elevation
-                card.setMaxCardElevation(15);
+                    // Set CardView elevation
+                    card.setCardElevation(9);
 
-                // Set CardView elevation
-                card.setCardElevation(9);
+                    // Initialize a new TextView to put in CardView
+                    TextView tv = new TextView(mContext);
+                    tv.setLayoutParams(params);
+                    tv.setText(event.getName());
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                    tv.setTextColor(Color.RED);
 
-                // Gives some space between the events.
-                params.leftMargin = 50;
-                params.topMargin = 50;
+                    // Put the TextView in CardView
+                    card.addView(tv);
 
-                // Initialize a new TextView to put in CardView
-                TextView tv = new TextView(mContext);
-                tv.setLayoutParams(params);
-                tv.setText(event.getName());
-                tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-                tv.setTextColor(Color.YELLOW);
-
-                // Put the TextView in CardView
-                card.addView(tv);
-
-                // Finally, add the CardView in root layout
-                mRelativeLayout.addView(card);
-
+                    // Finally, add the CardView in root layout
+                    mRelativeLayout.addView(card);
+                }
             }
 
 
@@ -159,12 +184,10 @@ public class ScheduleActivity extends LoginActivity {
             public void onClick(View v)
             {
                 //get the date in the top date counter to be one day prev
+                //start by decrementing the displacement variable
                 D.Dec();
-                Calendar c = Calendar.getInstance();
-                c.setTime(Now);
-                c.add(Calendar.DATE, D.GetDis());
-                Date d = c.getTime();
-                textDate.setText(DateFormat.getDateInstance().format(d));
+                //then change the date, and update the front.
+                textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
             }
         });
         buttonNext.setOnClickListener(new View.OnClickListener()
@@ -174,12 +197,10 @@ public class ScheduleActivity extends LoginActivity {
             public void onClick(View v)
             {
                 //get the date in the top date counter to be the next day
+                //start by incrementing the variable
                 D.Inc();
-                Calendar c = Calendar.getInstance();
-                c.setTime(Now);
-                c.add(Calendar.DATE, D.GetDis());
-                Date d = c.getTime();
-                textDate.setText(DateFormat.getDateInstance().format(d));
+                //then change the date and update the front
+                textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
             }
         });
     }

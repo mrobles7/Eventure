@@ -18,11 +18,11 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/date"
+        android:id="@+id/txtDate"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="none|date"
         app:layout_constraintBottom_toBottomOf="@+id/btnNext"
         app:layout_constraintEnd_toStartOf="@+id/btnNext"
         app:layout_constraintStart_toEndOf="@+id/btnPrev"
@@ -36,7 +36,7 @@
         android:layout_marginTop="16dp"
         android:text="Next Day"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintStart_toEndOf="@+id/txtDate"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -45,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:text="Prev Day"
-        app:layout_constraintBaseline_toBaselineOf="@+id/date"
-        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtDate"
+        app:layout_constraintEnd_toStartOf="@+id/txtDate"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView

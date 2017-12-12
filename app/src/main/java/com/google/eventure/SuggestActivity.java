@@ -100,7 +100,7 @@ public class SuggestActivity extends LoginActivity {
         possibleEvents.add(Event3);
         possibleEvents.add(Event4);
 
-        LinearLayout mRelativeLayout;
+        LinearLayout mRelativeLayout; //a linear layout named relative layout
 
         Context mContext;
 
