@@ -75,6 +75,7 @@ public class SandBoxActivity extends LoginActivity {
             // Set CardView elevation
             card.setCardElevation(9);
 
+            //Gives spacing in between events
             params.leftMargin = 50;
             params.topMargin = 50;
 
