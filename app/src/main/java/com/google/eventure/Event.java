@@ -91,6 +91,12 @@ public class Event {
     public void sethour(int hour){
         this.hour=hour;
     }
+    public void setEhour(int Ehour){
+        this.EHour=Ehour;
+    }
+    public void setEminute(int minute){
+        this.EMinute=minute;
+    }
     public void setDate(String Date){
         // Should be in the format:
         // Four digit year/Two digit month/Two digit Day/Hour of day 1-24/Minutes in hour
@@ -121,33 +127,34 @@ public class Event {
     }
 
     public int getyear() {
-        return year;
+        return this.year;
     }
 
     public int getmonth() {
-        return month;
+        return this.month;
     }
 
     public int getday() {
-        return day;
+        return this.day;
     }
 
     public int gethour() {
-        return hour;
+        return this.hour;
     }
 
     public int getminute() {
-        return minute;
+        return this.minute;
     }
 
     public boolean getnotification() {
-        return notification;
+        return this.notification;
     }
 
     public int getEMinute() {
-        return EMinute;
+        return this.EMinute;
     }
     public int getEHour() {
-        return EHour;
+        return this.EHour;
     }
+
 }

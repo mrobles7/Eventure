@@ -56,7 +56,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String  KEY_description = "description";
     private static final String  KEY_Ename = "Ename";
     private static final String  KEY_notification= "notification";
-
+    private static final String  KEY_Ehour= "Ehour";
+    private static final String  KEY_Eminute= "Eminute";
 
 
     // NOTE_TAGS Table - column names
@@ -71,9 +72,9 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     public static final String CREATE_TABLE_EVENT = "CREATE TABLE " + TABLE_EVENT
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_year+ " INTEGER,"
-            + KEY_month+ " INTEGER," + KEY_day+ " INTEGER," + KEY_hour+ " INTEGER,"
-            +KEY_minute+ " INTEGER," + KEY_location + " Text," + KEY_Ename+ " Text,"
-            + KEY_notification + " DATE," + KEY_description + " Text"
+            + KEY_month+ " INTEGER," + KEY_day+ " INTEGER," + KEY_hour+ " INTEGER,"+ KEY_Ename+" Text,"
+            + KEY_minute+ " INTEGER," + KEY_location + " Text," + KEY_Ehour+ " INTEGER," +KEY_Eminute+" INTEGER,"
+            + KEY_notification + " TEXT," + KEY_description + " Text"
             + ")";
 
     public static final String CREATE_TABLE_STUDENT_EVENT = "CREATE TABLE "
@@ -83,7 +84,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-       // context.deleteDatabase(DATABASE_NAME);
+        //context.deleteDatabase(DATABASE_NAME);
         // TODO Auto-generated constructor stub
     }
 
@@ -175,6 +176,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+
         values.put(KEY_Ename, event.getName());
         values.put(KEY_year, event.getyear());
         values.put(KEY_month, event.getmonth());
@@ -183,7 +185,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         values.put(KEY_hour, event.gethour());
         values.put(KEY_location, event.getlocation());
         values.put(KEY_description, event.getDescription());
-        values.put(KEY_notification, event.getnotification());
+        values.put(KEY_Ehour, event.getEHour());
+        values.put(KEY_Eminute, event.getEMinute());
 
         // insert row
         long event_id = db.insert(TABLE_EVENT, null, values);
@@ -217,6 +220,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Event t = new Event();
+
                 t.setId(c.getInt((c.getColumnIndex(KEY_ID))));
                 t.setName(c.getString(c.getColumnIndex(KEY_Ename)));
                 t.setYear(c.getInt(c.getColumnIndex(KEY_year)));
@@ -226,6 +230,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
                 t.setday(c.getInt(c.getColumnIndex(KEY_day)));
                 t.sethour(c.getInt(c.getColumnIndex(KEY_hour)));
                 t.setMinute(c.getInt(c.getColumnIndex(KEY_minute)));
+                t.setEhour(c.getInt(c.getColumnIndex(KEY_Ehour)));
+                t.setEminute(c.getInt(c.getColumnIndex(KEY_Eminute)));
 
                 // adding to todo list
                 events.add(t);

@@ -5,22 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventActivity extends LoginActivity {
+public class EventActivity extends ScheduleActivity {
     DatabaseHelper db;
-    Event event;
-    public void setEvent(Event e){
-        event=e;
-    }
-
-    public Event getEvent(){
-        return this.event;
-    }
-
 
 
     static int IDcounter = 0;
@@ -48,11 +40,8 @@ public class EventActivity extends LoginActivity {
             final Button buttonSave = (Button) findViewById(R.id.btnSave);
             final Button buttonScrap = (Button) findViewById((R.id.btnScrap));
 
-        if(event!=null){
 
-            textMonth.setText(event.getmonth());
 
-        }
 
 
         buttonScrap.setOnClickListener(new View.OnClickListener() {
@@ -104,17 +93,6 @@ public class EventActivity extends LoginActivity {
                 } catch (Exception EX) {
                     Toast.makeText(getApplicationContext(), "Please make sure that all values for time & date are integer values.", Toast.LENGTH_LONG).show();
                 }
-
-                //---------LIST OF ALL EVENTS ADDED -------------///
-                DatabaseHelper db;
-                db = new DatabaseHelper(getApplicationContext());
-                List<Event> events = db.getAllEventsByStudent( student.getPassword() );
-                for (Event event : events) {
-
-                        event.getName();
-                        event.getday();
-                        event.getDescription();
-                    }
 
 
                 Intent EventIntent = new Intent(EventActivity.this, ScheduleActivity.class);

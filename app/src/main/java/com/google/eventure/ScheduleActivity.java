@@ -26,7 +26,8 @@ import java.util.Calendar;
 
 public class ScheduleActivity extends LoginActivity {
 
-    public Student St;
+    public Student St = student;
+    public static Event ev;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Makes sure that the keyboard doesn't automatically pops up
@@ -104,62 +105,61 @@ public class ScheduleActivity extends LoginActivity {
             final DatabaseHelper db;
             db = new DatabaseHelper(getApplicationContext());
             List<Event> events = db.getAllEventsByStudent(student.getPassword() );
-            for (final Event event : events) {
-              /*  int EGD, EGM, DGD, DGM;
-                EGD = event.getday();
-                EGM = event.getmonth();
-                DGD = D.getDOM();
-                DGM = D.getMON();
-                if( event.getday() == D.getDOM() && event.getmonth() == D.getMON() )*/ {
-                    // Initialize a new CardView
-                    CardView card = new CardView(mContext);
+            /*  int EGD, EGM, DGD, DGM;
+              EGD = event.getday();
+              EGM = event.getmonth();
+              DGD = D.getDOM();
+              DGM = D.getMON();
+              if( event.getday() == D.getDOM() && event.getmonth() == D.getMON() )*/
+        for (final Event event : events) {
+            // Initialize a new CardView
+            CardView card = new CardView(mContext);
 
-                    // Set the CardView layoutParams
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
-                    card.setLayoutParams(params);
+            // Set the CardView layoutParams
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
+            card.setLayoutParams(params);
 
-                    // Set CardView corner radius
-                    card.setRadius(9);
+            // Set CardView corner radius
+            card.setRadius(9);
 
-                    // Set cardView content padding
-                    card.setContentPadding(15, 15, 15, 15);
+            // Set cardView content padding
+            card.setContentPadding(15, 15, 15, 15);
 
-                    // Set a background color for CardView
-                    card.setCardBackgroundColor(Color.parseColor("#00008B"));
+            // Set a background color for CardView
+            card.setCardBackgroundColor(Color.parseColor("#00008B"));
 
-                    // Set the CardView maximum elevation
-                    card.setMaxCardElevation(15);
+            // Set the CardView maximum elevation
+            card.setMaxCardElevation(15);
 
-                    // Set CardView elevation
-                    card.setCardElevation(9);
+            // Set CardView elevation
+            card.setCardElevation(9);
 
-                    // Gives spacing in between events
-                    params.leftMargin = 50;
-                    params.topMargin = 50;
+            // Gives spacing in between events
+            params.leftMargin = 50;
+            params.topMargin = 50;
 
-                    // Initialize a new TextView to put in CardView
-                    TextView tv = new TextView(mContext);
-                    tv.setLayoutParams(params);
-                    tv.setText(event.getName());
-                    tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-                    tv.setTextColor(Color.YELLOW);
+            // Initialize a new TextView to put in CardView
+            TextView tv = new TextView(mContext);
+            tv.setLayoutParams(params);
+            tv.setText(event.getName() + "\n" + "Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
+                    event.getEHour() + ":" + event.getEMinute());
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+            tv.setTextColor(Color.YELLOW);
 
-                    // Put the TextView in CardView
-                    card.addView(tv);
+            // Put the TextView in CardView
+            card.addView(tv);
 
-                    // Finally, add the CardView in root layout
-                    mRelativeLayout.addView(card);
-                    card.setOnClickListener(new CardView.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            EventActivity newevent = new EventActivity();
-                            newevent.setEvent(event);
-                            Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
-                            startActivity(intent);
-                        }
-                    });
+            // Finally, add the CardView in root layout
+            mRelativeLayout.addView(card);
+            card.setOnClickListener(new CardView.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ev = event;
+                    Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
+                    startActivity(intent);
                 }
-            }
+            });
+        }
 
 
         // textView is the TextView view that should display it

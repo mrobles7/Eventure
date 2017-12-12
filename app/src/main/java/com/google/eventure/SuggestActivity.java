@@ -20,9 +20,9 @@ public class SuggestActivity extends LoginActivity {
 
     ArrayList<Event> possibleEvents = new ArrayList<Event>(4);
     Event Event1 = new Event(1,2017,12,5,3,30,5,30,0,
-            0,"Final class","Art","COB2");
+            0,"Final class","Google workshop","COB2");
     Event Event2 = new Event(2,2017,12,6,3,30,6,0,0,
-            0,"Final class","BIO","COB2");
+            0,"Final class","Resume Workshop","COB2");
     Event Event3 = new Event(3,2017,12,7,3,30,7,30,0,
             0,"Final class","Class","COB2");
     Event Event4 = new Event(4,2017,12,8,3,30,8,0,0,
@@ -155,7 +155,8 @@ public class SuggestActivity extends LoginActivity {
             // Initialize a new TextView to put in CardView
             TextView tv = new TextView(mContext);
             tv.setLayoutParams(params);
-            tv.setText(event.getName());
+            tv.setText(event.getName() + "\n" + "Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
+                    event.getEHour() + ":" + event.getEMinute());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
             tv.setTextColor(Color.YELLOW);
 
