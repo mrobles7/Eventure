@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity
                          storedUsername = st.getPassword();
                         //   check if the Stored password matches with  Password entered by user
                         if (password.equals(storedUsername) && userName.equals(storedPassword)) {
-                           student =st;
+                            student= st;
                             Intent login = new Intent(LoginActivity.this, ScheduleActivity.class);
                             LoginActivity.this.startActivity(login);
 

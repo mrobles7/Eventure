@@ -96,7 +96,7 @@ public class ScheduleActivity extends LoginActivity {
                 card.setContentPadding(15, 15, 15, 15);
 
                 // Set a background color for CardView
-                card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
+                card.setCardBackgroundColor(Color.parseColor("#00008B"));
 
                 // Set the CardView maximum elevation
                 card.setMaxCardElevation(15);
@@ -104,12 +104,16 @@ public class ScheduleActivity extends LoginActivity {
                 // Set CardView elevation
                 card.setCardElevation(9);
 
+                // Gives some space between the events.
+                params.leftMargin = 50;
+                params.topMargin = 50;
+
                 // Initialize a new TextView to put in CardView
                 TextView tv = new TextView(mContext);
                 tv.setLayoutParams(params);
                 tv.setText(event.getName());
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-                tv.setTextColor(Color.RED);
+                tv.setTextColor(Color.YELLOW);
 
                 // Put the TextView in CardView
                 card.addView(tv);
