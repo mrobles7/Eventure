@@ -87,6 +87,7 @@ public class ScheduleActivity extends LoginActivity {
         final String currentDateString = DateFormat.getDateInstance().format(Now);
         final TextView textDate = (TextView) findViewById(R.id.txtDate);
         final Button buttonSuggest = (Button) findViewById(R.id.btnSuggest);
+        final Button buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
         final Button buttonEditEvent = (Button) findViewById(R.id.buttonEdit);
         final Button buttonPrev = (Button) findViewById((R.id.btnPrev));
         final Button buttonNext = (Button) findViewById((R.id.btnNext));
@@ -170,6 +171,15 @@ public class ScheduleActivity extends LoginActivity {
 
             // textView is the TextView view that should display it
 
+            buttonLogOut.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //This will happen when clicked
+                public void onClick(View v) {
+                    //We say we are in LoginActivity and to open the intent
+                    Intent EditIntent = new Intent(ScheduleActivity.this, LoginActivity.class);
+                    ScheduleActivity.this.startActivity(EditIntent);
+                }
+            });
 
             buttonSuggest.setOnClickListener(new View.OnClickListener() {
                 @Override
