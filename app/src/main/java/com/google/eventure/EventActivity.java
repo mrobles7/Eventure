@@ -70,13 +70,12 @@ public class EventActivity extends ScheduleActivity {
         buttonScrap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(), "Event Deleted.", Toast.LENGTH_LONG).show();
             if(ev!=null) {
                 db = new DatabaseHelper(getApplicationContext());
                 db.deleteEvent(ev.getId());
                 Intent EventIntent = new Intent(EventActivity.this, ScheduleActivity.class);
                 startActivity(EventIntent);
-                Toast.makeText(getApplicationContext(), "Event Deleted.", Toast.LENGTH_LONG).show();
             }
             }
         });
@@ -100,17 +99,16 @@ public class EventActivity extends ScheduleActivity {
                     int Repeat = Integer.parseInt((textRepeat.getText().toString()))+1;
 
                     //create a new list of events to be added
-                    if(ev==null) {
-                        for (int i = 0; i < Repeat; i++) {
+
                             // then create the event
-                            Event1 = new Event(year, month, (day * 7 * i), SHour, SMinute, EHour, EMinute, NHour, NMinute,
+                            Event1 = new Event(year, month, (day ), SHour, SMinute, EHour, EMinute, NHour, NMinute,
                                     textNote.getText().toString(), textEvent.getText().toString(), textLoc.getText().toString());
 
                             db = new DatabaseHelper(getApplicationContext());
                             Event1.setId(db.createEvent(Event1, new long[]{student.getID()}));
-                        }
-                    }
-                    else{
+
+
+
                             ev.setEminute(EMinute);
                             ev.setName(textEvent.getText().toString());ev.setYear(year);
                             ev.setlocation(textLoc.getText().toString());ev.setmonth(month);
@@ -119,7 +117,7 @@ public class EventActivity extends ScheduleActivity {
                             ev.setEminute(EMinute);
                             db.updateEvent(ev);
 
-                    }
+
                   //set values back to null
                     Toast.makeText(getApplicationContext(), "event succesfully added.", Toast.LENGTH_LONG).show();
 

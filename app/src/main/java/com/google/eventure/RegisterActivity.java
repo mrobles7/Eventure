@@ -17,7 +17,7 @@ public class RegisterActivity extends LoginActivity {
 
     // SQLiteOpenHelper openHelper;
     //initialize database
-    // DBHandler db;
+
 
     Button btnlogin;
     DatabaseHelper db;

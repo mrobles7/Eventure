@@ -33,11 +33,12 @@ public class ScheduleActivity extends LoginActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Makes sure that the keyboard doesn't automatically pops up
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         //this is a containment class.  It's purpose is to
         //contain the displacement from the current date to
