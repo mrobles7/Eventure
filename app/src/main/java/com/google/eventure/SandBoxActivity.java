@@ -32,9 +32,9 @@ public class SandBoxActivity extends LoginActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sand_box);
 
-        Event Event1 = new Event(1,2017,12,5,3,30,5,30,0,
+        Event Event1 = new Event(2017,12,5,3,30,5,30,0,
                 0,"Final class","BIO","COB2");
-        Event Event2 = new Event(2,2017,12,6,3,30,6,0,0,
+        Event Event2 = new Event(2017,12,6,3,30,6,0,0,
                 0,"Final class","ART","COB2");
         long Event1_id = db.createEvent(Event1, new long[]{student.getID()});
         long Event2_id = db.createEvent(Event2, new long[]{student.getID()});

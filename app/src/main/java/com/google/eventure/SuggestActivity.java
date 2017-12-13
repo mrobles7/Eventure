@@ -19,13 +19,13 @@ import java.util.List;
 public class SuggestActivity extends LoginActivity {
 
     ArrayList<Event> possibleEvents = new ArrayList<Event>(4);
-    Event Event1 = new Event(1,2017,12,5,3,30,5,30,0,
+    Event Event1 = new Event(2017,12,5,3,30,5,30,0,
             0,"Final class","Google workshop","COB2");
-    Event Event2 = new Event(2,2017,12,6,3,30,6,0,0,
+    Event Event2 = new Event(2017,12,6,3,30,6,0,0,
             0,"Final class","Resume Workshop","COB2");
-    Event Event3 = new Event(3,2017,12,7,3,30,7,30,0,
+    Event Event3 = new Event(2017,12,7,3,30,7,30,0,
             0,"Final class","Class","COB2");
-    Event Event4 = new Event(4,2017,12,8,3,30,8,0,0,
+    Event Event4 = new Event(2017,12,8,3,30,8,0,0,
             0,"Final class","CSE","COB2");
 
 

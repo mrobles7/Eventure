@@ -11,8 +11,8 @@ import java.util.Date;
 
 //Event and classes object
 public class Event {
-
-    int id, year, month, day, hour, minute, EHour, EMinute;
+    long id;
+    int year, month, day, hour, minute, EHour, EMinute,Nhour,NMinute;
     Date StartDate, EndDate, NotifDate;
     String location, description, Ename, SDate, EDate, NDate;
     boolean notification;
@@ -24,7 +24,7 @@ public class Event {
     */
     }
 
-    public Event (int id, int year, int month, int day, int hour, int minute, int EHour, int EMinute, int NHour, int NMinute,
+    public Event ( int year, int month, int day, int hour, int minute, int EHour, int EMinute, int NHour, int NMinute,
                   String Description, String Name, String Location)
     {
         SDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
@@ -33,7 +33,6 @@ public class Event {
         this.StartDate = convertStringtoDate(SDate);
         this.EndDate = convertStringtoDate(EDate);
         this.NotifDate = convertStringtoDate(NDate);
-        this.id = id;
         this.year = year;
         this.month = month;
         this.day = day;
@@ -44,6 +43,8 @@ public class Event {
         this.description = Description;
         this.Ename = Name;
         this.location = Location;
+        this.Nhour=NHour;
+        this.NMinute=NMinute;
     }
 
     //this method was pulled off of
@@ -64,7 +65,7 @@ public class Event {
     }
 
 
-    public void setId(int id){
+    public void setId(long id){
         this.id=id;
     }
     public void setName(String name){
@@ -103,7 +104,7 @@ public class Event {
         this.SDate=Date;
         this.StartDate = convertStringtoDate(Date);
     }
-    public int getId(){
+    public long getId(){
         return this.id;
     }
     public String getName(){
@@ -157,4 +158,11 @@ public class Event {
         return this.EHour;
     }
 
+    public int getNhour() {
+        return Nhour;
+    }
+
+    public int getNminute() {
+        return NMinute;
+    }
 }

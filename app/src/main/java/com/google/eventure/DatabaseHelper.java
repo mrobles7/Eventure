@@ -241,5 +241,29 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         return events;
     }
 
+    public void deleteEvent(long Event_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_EVENT, KEY_ID + " = ?",
+                new String[] { String.valueOf(Event_id) });
+    }
+
+    public int updateEvent(Event event) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_Ename, event.getName());
+        values.put(KEY_year, event.getyear());
+        values.put(KEY_month, event.getmonth());
+        values.put(KEY_day, event.getday());
+        values.put(KEY_minute, event.getminute());
+        values.put(KEY_hour, event.gethour());
+        values.put(KEY_location, event.getlocation());
+        values.put(KEY_description, event.getDescription());
+        values.put(KEY_Ehour, event.getEHour());
+        values.put(KEY_Eminute, event.getEMinute());
+        // updating row
+        return db.update(TABLE_EVENT, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(event.getId()) });
+    }
 
 }

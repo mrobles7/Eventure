@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity
 
                         }
                     }
-                    //Toast.makeText(LoginActivity.this,"Wrong user name or password ", Toast.LENGTH_LONG).show();
+
                 }
             });
 

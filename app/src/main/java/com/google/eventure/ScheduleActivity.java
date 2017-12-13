@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.Window;
+import android.widget.Toast;
 
 import java.sql.Struct;
 import java.util.Calendar;
@@ -186,6 +187,8 @@ public class ScheduleActivity extends LoginActivity {
             {
                 //An intent opens the register activity
                 //We say we are in LoginActivity and to open the intent
+                Toast.makeText(getApplicationContext(), "Please make sure that all values for time & date are integer values.", Toast.LENGTH_LONG).show();
+                ev=null;
                 Intent EditIntent = new Intent(ScheduleActivity.this, EventActivity.class);
                 ScheduleActivity.this.startActivity(EditIntent);
             }
