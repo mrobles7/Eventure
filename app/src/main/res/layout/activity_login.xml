@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     tools:context="com.google.eventure.LoginActivity">
 
     <EditText
@@ -12,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="118dp"
         android:ems="10"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
         android:ems="10"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/editUsername"
@@ -35,6 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="Login"
+        android:background="#FFD700"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/registerLink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -44,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:layout_marginBottom="84dp"
+        android:textColor="@android:color/darker_gray"
         android:text="Register Here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/buttonLogin" />

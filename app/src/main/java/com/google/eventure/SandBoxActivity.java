@@ -3,6 +3,7 @@ package com.google.eventure;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,9 +41,6 @@ public class SandBoxActivity extends LoginActivity {
         long Event2_id = db.createEvent(Event2, new long[]{student.getID()});
         // Get the application context
         mContext = getApplicationContext();
-
-        // Change the action bar color
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
 
         // Get the widgets reference from XML layout
         mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
