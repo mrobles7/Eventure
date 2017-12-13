@@ -19,14 +19,14 @@ import java.util.List;
 public class SuggestActivity extends LoginActivity {
 
     ArrayList<Event> possibleEvents = new ArrayList<Event>(4);
-    Event Event1 = new Event(2017,12,5,3,30,5,30,0,
-            0,"Final class","Google workshop","COB2");
-    Event Event2 = new Event(2017,12,6,3,30,6,0,0,
+    Event Event1 = new Event(2017,12,12,3,30,5,30,0,
             0,"Final class","Resume Workshop","COB2");
-    Event Event3 = new Event(2017,12,7,3,30,7,30,0,
-            0,"Final class","Class","COB2");
-    Event Event4 = new Event(2017,12,8,3,30,8,0,0,
-            0,"Final class","CSE","COB2");
+    Event Event2 = new Event(2017,12,13,3,30,6,0,0,
+            0,"Final class","Study group","COB2");
+    Event Event3 = new Event(2017,12,14,3,30,7,30,0,
+            0,"Final class","Math tutor","COB2");
+    Event Event4 = new Event(2017,12,15,3,30,8,0,0,
+            0,"Final class","Free Food","COB2");
 
 
 
@@ -81,8 +81,10 @@ public class SuggestActivity extends LoginActivity {
                             || ( planES.before(PEE) && planEE.after(PEE) )
                             || ( planES.after(PES) && planEE.before(PEE) ))
                     {
-                        PE.remove(i);
-                        i--;
+                        if(i!=-1) {
+                            PE.remove(i);
+                            i--;
+                        }
                     }
                 }
             }
@@ -124,56 +126,59 @@ public class SuggestActivity extends LoginActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        for (final Event event : events) {
+            for (final Event event : events) {
 
-            // Initialize a new CardView
-            CardView card = new CardView(mContext);
+                // Initialize a new CardView
+                CardView card = new CardView(mContext);
 
-            // Set the CardView layoutParams
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
-            card.setLayoutParams(params);
+                // Set the CardView layoutParams
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
+                card.setLayoutParams(params);
 
-            // Set CardView corner radius
-            card.setRadius(9);
+                // Set CardView corner radius
+                card.setRadius(9);
 
-            // Set cardView content padding
-            card.setContentPadding(15, 15, 15, 15);
+                // Set cardView content padding
+                card.setContentPadding(15, 15, 15, 15);
 
-            // Set a background color for CardView
-            card.setCardBackgroundColor(Color.parseColor("#00008B"));
+                // Set a background color for CardView
+                card.setCardBackgroundColor(Color.parseColor("#00008B"));
 
-            // Set the CardView maximum elevation
-            card.setMaxCardElevation(15);
+                // Set the CardView maximum elevation
+                card.setMaxCardElevation(15);
 
-            // Set CardView elevation
-            card.setCardElevation(9);
+                // Set CardView elevation
+                card.setCardElevation(9);
 
-            // Gives some space between the events.
-            params.leftMargin = 50;
-            params.topMargin = 50;
+                // Gives some space between the events.
+                params.leftMargin = 50;
+                params.topMargin = 50;
 
-            // Initialize a new TextView to put in CardView
-            TextView tv = new TextView(mContext);
-            tv.setLayoutParams(params);
-            tv.setText(event.getName() + "\n" + "Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
-                    event.getEHour() + ":" + event.getEMinute());
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-            tv.setTextColor(Color.YELLOW);
+                // Initialize a new TextView to put in CardView
+                TextView tv = new TextView(mContext);
+                tv.setLayoutParams(params);
+                tv.setText(event.getName() +"\n" +"Date: " +event.getmonth()+"/"+event.getday()+"/"+event.getyear()
+                        + "Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
+                        event.getEHour() + ":" + event.getEMinute());
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                tv.setTextColor(Color.YELLOW);
 
-            // Put the TextView in CardView
-            card.addView(tv);
+                // Put the TextView in CardView
+                card.addView(tv);
 
-            // Finally, add the CardView in root layout
-            mRelativeLayout.addView(card);
-            card.setOnClickListener(new CardView.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    db.createEvent(event, new long[]{student.getID()});
-                    Intent intent = new Intent(SuggestActivity.this, ScheduleActivity.class);
-                    startActivity(intent);
-                }
-            });
+                // Finally, add the CardView in root layout
+                mRelativeLayout.addView(card);
+                card.setOnClickListener(new CardView.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        db.createEvent(event, new long[]{student.getID()});
+                        Intent intent = new Intent(SuggestActivity.this, ScheduleActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
+
     }
 
-}
+

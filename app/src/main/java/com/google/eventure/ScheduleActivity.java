@@ -29,6 +29,7 @@ public class ScheduleActivity extends LoginActivity {
 
     public Student St = student;
     public static Event ev;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Makes sure that the keyboard doesn't automatically pops up
@@ -45,32 +46,37 @@ public class ScheduleActivity extends LoginActivity {
             //how far away from today are we?
             int displacement = 0;
             //todays date, date currently being shown
-            Date TodayDate,disDate;
-            displace(Date d){
+            Date TodayDate, disDate;
+
+            displace(Date d) {
                 TodayDate = d;
                 disDate = d;
             }
-            public void Inc(){
+
+            public void Inc() {
                 displacement++;
             }
-            public void Dec(){
+
+            public void Dec() {
                 displacement--;
             }
-            Date ChangeDate(){
+
+            Date ChangeDate() {
                 Calendar c = Calendar.getInstance();
                 c.setTime(TodayDate);
                 c.add(Calendar.DATE, displacement);
                 return disDate = c.getTime();
             }
-            int getDOM(){
+
+            boolean sameDay(Date D1) {
+                //see if displaced date is the same as the given date
+                Calendar D = Calendar.getInstance();
                 Calendar c = Calendar.getInstance();
+                D.setTime(D1);
                 c.setTime(disDate);
-                return c.get(Calendar.DAY_OF_MONTH);
-            }
-            int getMON(){
-                Calendar c = Calendar.getInstance();
-                c.setTime(disDate);
-                return c.get(Calendar.MONTH);
+                return D.get(Calendar.YEAR) == c.get(Calendar.YEAR) &&
+                        D.get(Calendar.MONTH) == c.get(Calendar.MONTH) &&
+                        D.get(Calendar.DAY_OF_MONTH) == c.get(Calendar.DAY_OF_MONTH);
             }
 
         }
@@ -89,135 +95,294 @@ public class ScheduleActivity extends LoginActivity {
 
         Context mContext;
 
-            // Request window feature action bar
+        textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
+        textDate.setText(currentDateString);
+
+        // Get the application context
+        mContext = getApplicationContext();
+
+        // Change the action bar color
+//            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+
+        // Get the widgets reference from XML layout
+        mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
+        int height = -2;
+
+        final DatabaseHelper db;
+        db = new DatabaseHelper(getApplicationContext());
+        List<Event> events = db.getAllEventsByStudent(student.getPassword());
+
+
+        for (final Event event : events) {
+            // Initialize a new CardView
+
+            if (D.sameDay(event.getStart())) {
+
+                CardView card = new CardView(mContext);
+
+                // Set the CardView layoutParams
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
+                card.setLayoutParams(params);
+
+                // Set CardView corner radius
+                card.setRadius(9);
+
+                // Set cardView content padding
+                card.setContentPadding(15, 15, 15, 15);
+
+                // Set a background color for CardView
+                card.setCardBackgroundColor(Color.parseColor("#00008B"));
+
+                // Set the CardView maximum elevation
+                card.setMaxCardElevation(15);
+
+                // Set CardView elevation
+                card.setCardElevation(9);
+
+                // Gives spacing in between events
+                params.leftMargin = 50;
+                params.topMargin = 50;
+
+                // Initialize a new TextView to put in CardView
+                TextView tv = new TextView(mContext);
+                tv.setLayoutParams(params);
+                tv.setText(event.getName() +"\n" +"Date: "+event.getmonth()+"/"+event.getday()+"/"+event.getyear()
+                        + "\n"+"Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
+                        event.getEHour() + ":" + event.getEMinute());
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+                tv.setTextColor(Color.YELLOW);
+
+                // Put the TextView in CardView
+                card.addView(tv);
+
+                // Finally, add the CardView in root layout
+                mRelativeLayout.addView(card);
+                card.setOnClickListener(new CardView.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ev = event;
+                        Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                // }
+            }
+
+            // textView is the TextView view that should display it
+
+
+            buttonSuggest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //This will happen when clicked
+                public void onClick(View v) {
+                    //We say we are in LoginActivity and to open the intent
+                    Intent EditIntent = new Intent(ScheduleActivity.this, SuggestActivity.class);
+                    ScheduleActivity.this.startActivity(EditIntent);
+                }
+            });
+
+            buttonEditEvent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //This will happen when clicked
+                public void onClick(View v) {
+                    //An intent opens the register activity
+                    //We say we are in LoginActivity and to open the intent
+                    Toast.makeText(getApplicationContext(), "Please make sure that all values for time & date are integer values.", Toast.LENGTH_LONG).show();
+                    ev = null;
+                    Intent EditIntent = new Intent(ScheduleActivity.this, EventActivity.class);
+                    ScheduleActivity.this.startActivity(EditIntent);
+                }
+            });
+            buttonPrev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //This will happen when clicked
+                public void onClick(View v) {
+                    //get the date in the top date counter to be one day prev
+                    //start by decrementing the displacement variable
+                    D.Dec();
+
+
+                    //then change the date, and update the front.
+                    textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
+
+                    LinearLayout mRelativeLayout;
+
+                    Context mContext;
+                    // Get the application context
+                    mContext = getApplicationContext();
+
+                    // Change the action bar color
+//            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+
+                    // Get the widgets reference from XML layout
+                    mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
+
+
+                    if(( mRelativeLayout).getChildCount() > 0)
+                        (mRelativeLayout).removeAllViews();
+                    int height = -2;
+
+                    final DatabaseHelper db;
+                    db = new DatabaseHelper(getApplicationContext());
+                    List<Event> events = db.getAllEventsByStudent(student.getPassword());
+
+
+                    for (final Event event : events) {
+                        // Initialize a new CardView
+
+                        if (D.sameDay(event.getStart())) {
+
+                            CardView card = new CardView(mContext);
+
+                            // Set the CardView layoutParams
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
+                            card.setLayoutParams(params);
+
+                            // Set CardView corner radius
+                            card.setRadius(9);
+
+                            // Set cardView content padding
+                            card.setContentPadding(15, 15, 15, 15);
+
+                            // Set a background color for CardView
+                            card.setCardBackgroundColor(Color.parseColor("#00008B"));
+
+                            // Set the CardView maximum elevation
+                            card.setMaxCardElevation(15);
+
+                            // Set CardView elevation
+                            card.setCardElevation(9);
+
+                            // Gives spacing in between events
+                            params.leftMargin = 50;
+                            params.topMargin = 50;
+
+                            // Initialize a new TextView to put in CardView
+                            TextView tv = new TextView(mContext);
+                            tv.setLayoutParams(params);
+                            tv.setText(event.getName() +"\n" +"Date: "+event.getmonth()+"/"+event.getday()+"/"+event.getyear()
+                                    + "\n"+"Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
+                                    event.getEHour() + ":" + event.getEMinute());
+
+                            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+                            tv.setTextColor(Color.YELLOW);
+
+                            // Put the TextView in CardView
+                            card.addView(tv);
+
+                            // Finally, add the CardView in root layout
+                            mRelativeLayout.addView(card);
+                            card.setOnClickListener(new CardView.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ev = event;
+                                    Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }
+                }
+
+
+
+            });
+            buttonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //This will happen when clicked
+                public void onClick(View v) {
+                    //get the date in the top date counter to be the next day
+                    //start by incrementing the variable
+
+                    D.Inc();
+
+                    //then change the date and update the front
+                    textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
+                    LinearLayout mRelativeLayout;
+
+                    Context mContext;
+
+                    // Request window feature action bar
 //           requestWindowFeature(Window.FEATURE_ACTION_BAR);
 
 
-            // Get the application context
-            mContext = getApplicationContext();
+                    // Get the application context
+                    mContext = getApplicationContext();
 
-            // Change the action bar color
+                    // Change the action bar color
 //            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
 
-            // Get the widgets reference from XML layout
-            mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
-            int height =-2;
+                    // Get the widgets reference from XML layout
+                    mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
+                    if(( mRelativeLayout).getChildCount() > 0)
+                        (mRelativeLayout).removeAllViews();
 
-            final DatabaseHelper db;
-            db = new DatabaseHelper(getApplicationContext());
-            List<Event> events = db.getAllEventsByStudent(student.getPassword() );
-            /*  int EGD, EGM, DGD, DGM;
-              EGD = event.getday();
-              EGM = event.getmonth();
-              DGD = D.getDOM();
-              DGM = D.getMON();
-              if( event.getday() == D.getDOM() && event.getmonth() == D.getMON() )*/
-        for (final Event event : events) {
-            // Initialize a new CardView
-            CardView card = new CardView(mContext);
 
-            // Set the CardView layoutParams
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
-            card.setLayoutParams(params);
+                    int height = -2;
 
-            // Set CardView corner radius
-            card.setRadius(9);
+                    final DatabaseHelper db;
+                    db = new DatabaseHelper(getApplicationContext());
+                    List<Event> events = db.getAllEventsByStudent(student.getPassword());
 
-            // Set cardView content padding
-            card.setContentPadding(15, 15, 15, 15);
 
-            // Set a background color for CardView
-            card.setCardBackgroundColor(Color.parseColor("#00008B"));
+                    for (final Event event : events) {
+                        // Initialize a new CardView
 
-            // Set the CardView maximum elevation
-            card.setMaxCardElevation(15);
+                        if (D.sameDay(event.getStart())) {
 
-            // Set CardView elevation
-            card.setCardElevation(9);
+                            CardView card = new CardView(mContext);
 
-            // Gives spacing in between events
-            params.leftMargin = 50;
-            params.topMargin = 50;
+                            // Set the CardView layoutParams
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height -= 2);
+                            card.setLayoutParams(params);
 
-            // Initialize a new TextView to put in CardView
-            TextView tv = new TextView(mContext);
-            tv.setLayoutParams(params);
-            tv.setText(event.getName() + "\n" + "Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
-                    event.getEHour() + ":" + event.getEMinute());
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
-            tv.setTextColor(Color.YELLOW);
+                            // Set CardView corner radius
+                            card.setRadius(9);
 
-            // Put the TextView in CardView
-            card.addView(tv);
+                            // Set cardView content padding
+                            card.setContentPadding(15, 15, 15, 15);
 
-            // Finally, add the CardView in root layout
-            mRelativeLayout.addView(card);
-            card.setOnClickListener(new CardView.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ev = event;
-                    Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
-                    startActivity(intent);
+                            // Set a background color for CardView
+                            card.setCardBackgroundColor(Color.parseColor("#00008B"));
+
+                            // Set the CardView maximum elevation
+                            card.setMaxCardElevation(15);
+
+                            // Set CardView elevation
+                            card.setCardElevation(9);
+
+                            // Gives spacing in between events
+                            params.leftMargin = 50;
+                            params.topMargin = 50;
+
+                            // Initialize a new TextView to put in CardView
+                            TextView tv = new TextView(mContext);
+                            tv.setLayoutParams(params);
+                            tv.setText(event.getName() +"\n" +"Date: "+event.getmonth()+"/"+event.getday()+"/"+event.getyear()
+                                    +"\n" +"Start Time " + event.gethour() + ":" + event.getminute() + "\n" + " End Time " +
+                                    event.getEHour() + ":" + event.getEMinute());
+                            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+                            tv.setTextColor(Color.YELLOW);
+
+                            // Put the TextView in CardView
+                            card.addView(tv);
+
+                            // Finally, add the CardView in root layout
+                            mRelativeLayout.addView(card);
+                            card.setOnClickListener(new CardView.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ev = event;
+                                    Intent intent = new Intent(ScheduleActivity.this, EventActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                            // }
+                        }
+                    }
                 }
             });
         }
 
-
-        // textView is the TextView view that should display it
-        textDate.setText(currentDateString);
-
-
-        buttonSuggest.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            //This will happen when clicked
-            public void onClick(View v)
-            {
-                //We say we are in LoginActivity and to open the intent
-                Intent EditIntent = new Intent(ScheduleActivity.this, SuggestActivity.class);
-                ScheduleActivity.this.startActivity(EditIntent);
-            }
-        });
-
-        buttonEditEvent.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            //This will happen when clicked
-            public void onClick(View v)
-            {
-                //An intent opens the register activity
-                //We say we are in LoginActivity and to open the intent
-                Toast.makeText(getApplicationContext(), "Please make sure that all values for time & date are integer values.", Toast.LENGTH_LONG).show();
-                ev=null;
-                Intent EditIntent = new Intent(ScheduleActivity.this, EventActivity.class);
-                ScheduleActivity.this.startActivity(EditIntent);
-            }
-        });
-        buttonPrev.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            //This will happen when clicked
-            public void onClick(View v)
-            {
-                //get the date in the top date counter to be one day prev
-                //start by decrementing the displacement variable
-                D.Dec();
-                //then change the date, and update the front.
-                textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
-            }
-        });
-        buttonNext.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            //This will happen when clicked
-            public void onClick(View v)
-            {
-                //get the date in the top date counter to be the next day
-                //start by incrementing the variable
-                D.Inc();
-                //then change the date and update the front
-                textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
-            }
-        });
     }
 }

@@ -63,7 +63,8 @@
         android:paddingTop="90dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:context="com.google.eventure.SandBoxActivity"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:id="@+id/rl_Container"

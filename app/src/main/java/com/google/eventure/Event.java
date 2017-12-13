@@ -27,9 +27,9 @@ public class Event {
     public Event ( int year, int month, int day, int hour, int minute, int EHour, int EMinute, int NHour, int NMinute,
                   String Description, String Name, String Location)
     {
-        SDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
-        EDate = year+"/"+month+"/"+day+"/"+EHour+"/"+EMinute;
-        NDate = year+"/"+month+"/"+day+"/"+NHour+"/"+NMinute;
+        this.SDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
+        this.EDate = year+"/"+month+"/"+day+"/"+EHour+"/"+EMinute;
+        this.NDate = year+"/"+month+"/"+day+"/"+NHour+"/"+NMinute;
         this.StartDate = convertStringtoDate(SDate);
         this.EndDate = convertStringtoDate(EDate);
         this.NotifDate = convertStringtoDate(NDate);
@@ -118,6 +118,8 @@ public class Event {
         return this.description;
     }
     public Date getStart() {
+        this.SDate = year+"/"+month+"/"+day+"/"+hour+"/"+minute;
+        StartDate = convertStringtoDate(SDate);
         return StartDate;
     }
     public Date getEnd(){

@@ -93,7 +93,7 @@ public class EventActivity extends ScheduleActivity {
                     EMinute = Integer.parseInt(textEndMinute.getText().toString());
                     NHour = Integer.parseInt(textNotifHour.getText().toString());
                     NMinute = Integer.parseInt(textNotifMinute.getText().toString());
-                    int Repeat = Integer.parseInt((textRepeat.getText().toString()));
+                    int Repeat = Integer.parseInt((textRepeat.getText().toString()))+1;
 
                     //create a new list of events to be added
                      ArrayList<Event> toAdd = new ArrayList<>(Repeat);
@@ -112,13 +112,9 @@ public class EventActivity extends ScheduleActivity {
                         Event1.setId(db.createEvent(Event1, new long[]{student.getID()}));
                     else {
                         ev.setEminute(EMinute);
-                        ev.setName(textEvent.getText().toString());
-                        ev.setYear(year);
-                        ev.setlocation(textLoc.getText().toString());
-                        ev.setmonth(month);
-                        ev.setday(day);
-                        ev.sethour(SHour);
-                        ev.setMinute(SMinute);
+                        ev.setName(textEvent.getText().toString());ev.setYear(year);
+                        ev.setlocation(textLoc.getText().toString());ev.setmonth(month);
+                        ev.setday(day);ev.sethour(SHour);ev.setMinute(SMinute);
                         ev.setEhour(EHour);
                         ev.setEminute(EMinute);
                         db.updateEvent(ev);
