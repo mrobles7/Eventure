@@ -108,12 +108,12 @@ public class ScheduleActivity extends LoginActivity {
         mRelativeLayout = (LinearLayout) findViewById(R.id.rl_Container);
         int height = -2;
 
-        final DatabaseHelper db;
+        DatabaseHelper db;
         db = new DatabaseHelper(getApplicationContext());
         List<Event> events = db.getAllEventsByStudent(student.getPassword());
 
 
-        for (final Event event : events) {
+        for ( final Event event : events) {
             // Initialize a new CardView
 
             if (D.sameDay(event.getStart())) {
@@ -222,7 +222,7 @@ public class ScheduleActivity extends LoginActivity {
                         (mRelativeLayout).removeAllViews();
                     int height = -2;
 
-                    final DatabaseHelper db;
+                    DatabaseHelper db;
                     db = new DatabaseHelper(getApplicationContext());
                     List<Event> events = db.getAllEventsByStudent(student.getPassword());
 
@@ -293,18 +293,11 @@ public class ScheduleActivity extends LoginActivity {
                 public void onClick(View v) {
                     //get the date in the top date counter to be the next day
                     //start by incrementing the variable
-
                     D.Inc();
-
                     //then change the date and update the front
                     textDate.setText(DateFormat.getDateInstance().format(D.ChangeDate()));
                     LinearLayout mRelativeLayout;
-
                     Context mContext;
-
-                    // Request window feature action bar
-//           requestWindowFeature(Window.FEATURE_ACTION_BAR);
-
 
                     // Get the application context
                     mContext = getApplicationContext();
@@ -320,12 +313,12 @@ public class ScheduleActivity extends LoginActivity {
 
                     int height = -2;
 
-                    final DatabaseHelper db;
+                    DatabaseHelper db;
                     db = new DatabaseHelper(getApplicationContext());
                     List<Event> events = db.getAllEventsByStudent(student.getPassword());
 
 
-                    for (final Event event : events) {
+                    for ( final Event event : events) {
                         // Initialize a new CardView
 
                         if (D.sameDay(event.getStart())) {
@@ -377,7 +370,6 @@ public class ScheduleActivity extends LoginActivity {
                                     startActivity(intent);
                                 }
                             });
-                            // }
                         }
                     }
                 }

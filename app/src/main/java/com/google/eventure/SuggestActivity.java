@@ -171,7 +171,7 @@ public class SuggestActivity extends LoginActivity {
                 card.setOnClickListener(new CardView.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        db.createEvent(event, new long[]{student.getID()});
+                        event.setId(db.createEvent(event, new long[]{student.getID()}));
                         Intent intent = new Intent(SuggestActivity.this, ScheduleActivity.class);
                         startActivity(intent);
                     }
